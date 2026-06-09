@@ -13,8 +13,8 @@
     "i18n": "CN",
     "nightTheme": "dark_colorblind",
     "primerCSS": "<link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />",
-    "allHead": "<link rel='stylesheet' href='/gitiu-bento.css?v=20260609a' />",
-    "script": "<script src='/plugins/articletoc.js'></script><script src='/plugins/lightbox.js'></script><script src='/gitiu-bento.js?v=20260609a'></script>",
+    "allHead": "<link rel='stylesheet' href='/gitiu-bento.css?v=20260610a' />",
+    "script": "<script src='/plugins/articletoc.js'></script><script src='/plugins/lightbox.js'></script><script src='/gitiu-bento.js?v=20260610a'></script>",
     "GMEEK_REPOSITORY": "gitiu/Gmeek",
     "GMEEK_VERSION": "main",
     "showPostSource": 0

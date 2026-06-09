@@ -757,9 +757,12 @@ html[data-color-mode="auto"] .gitiu-quote {
 }
 
 .friend-avatar {
+  display: block;
   width: 46px;
   height: 46px;
   flex: 0 0 auto;
+  max-height: none !important;
+  margin: 0 !important;
   border: 1px solid var(--gitiu-line);
   border-radius: 999px !important;
   background: #fff;

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
-    
+
     <link rel="icon" href="https://raw.githubusercontent.com/gitiu/gitiu.github.io/refs/heads/main/static/cat.svg"><script>
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
@@ -20,6 +20,7 @@
 <link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
+    <link rel='stylesheet' href='/gitiu-bento.css?v=20260608ac' />
 </head>
 <style>
 body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
@@ -66,7 +67,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
             <path id="pathHome" fill-rule="evenodd"></path>
         </svg>
     </a>
-    
+
 
     <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
         <svg class="octicon" width="16" height="16" >
@@ -82,44 +83,58 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 这里收藏了一些有趣的灵魂和优秀的项目。</p>
 </blockquote>
 <h3>🌸 友情链接</h3>
-<markdown-accessiblity-table><table role="table">
-<thead>
-<tr>
-<th align="left">站点名称</th>
-<th align="left">简介/Slogan</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><a href="https://www.gitiu.com/" rel="nofollow">Gitiu's Blog</a></td>
-<td align="left">谁能预测未来!</td>
-</tr>
-<tr>
-<td align="left"><a href="https://bugxia.com/" rel="nofollow">Bug 侠</a></td>
-<td align="left">互联网技术分享</td>
-</tr>
-<tr>
-<td align="left"><a href="https://davincisama.com/" rel="nofollow">Davinci 的红茶馆</a></td>
-<td align="left">记录生活与技术</td>
-</tr>
-<tr>
-<td align="left"><a href="https://www.zjh336.cn" rel="nofollow">华仔部落</a></td>
-<td align="left">个人生活记录</td>
-</tr>
-<tr>
-<td align="left"><a href="https://www.yuoo.cn/" rel="nofollow">YUOO</a></td>
-<td align="left">记录代码与生活</td>
-</tr>
-<tr>
-<td align="left"><a href="https://spiritx.xyz" rel="nofollow">Spirit</a></td>
-<td align="left">Keep Writing</td>
-</tr>
-<tr>
-<td align="left"><a href="https://mikublog.com/" rel="nofollow">MikuBlog</a></td>
-<td align="left">专注于二次元与技术</td>
-</tr>
-</tbody>
-</table></markdown-accessiblity-table>
+<!-- 友情链接卡片网格 -->
+<div class="friend-grid">
+  <a href="https://www.gitiu.com/" target="_blank" rel="nofollow noopener" class="friend-card">
+    <img src="https://raw.githubusercontent.com/gitiu/gitiu.github.io/refs/heads/main/static/cat.svg" class="friend-avatar" alt="Gitiu's Blog">
+    <span class="friend-info">
+      <span class="friend-name">Gitiu's Blog</span>
+      <span class="friend-desc">谁能预测未来!</span>
+    </span>
+  </a>
+  <a href="https://bugxia.com/" target="_blank" rel="nofollow noopener" class="friend-card">
+    <img src="https://www.google.com/s2/favicons?domain=bugxia.com&amp;sz=96" class="friend-avatar" alt="Bug 侠">
+    <span class="friend-info">
+      <span class="friend-name">Bug 侠</span>
+      <span class="friend-desc">互联网技术分享</span>
+    </span>
+  </a>
+  <a href="https://davincisama.com/" target="_blank" rel="nofollow noopener" class="friend-card">
+    <img src="https://www.google.com/s2/favicons?domain=davincisama.com&amp;sz=96" class="friend-avatar" alt="Davinci 的红茶馆">
+    <span class="friend-info">
+      <span class="friend-name">Davinci 的红茶馆</span>
+      <span class="friend-desc">记录生活与技术</span>
+    </span>
+  </a>
+  <a href="https://www.zjh336.cn" target="_blank" rel="nofollow noopener" class="friend-card">
+    <img src="https://www.google.com/s2/favicons?domain=www.zjh336.cn&amp;sz=96" class="friend-avatar" alt="华仔部落">
+    <span class="friend-info">
+      <span class="friend-name">华仔部落</span>
+      <span class="friend-desc">个人生活记录</span>
+    </span>
+  </a>
+  <a href="https://www.yuoo.cn/" target="_blank" rel="nofollow noopener" class="friend-card">
+    <img src="https://www.google.com/s2/favicons?domain=www.yuoo.cn&amp;sz=96" class="friend-avatar" alt="YUOO">
+    <span class="friend-info">
+      <span class="friend-name">YUOO</span>
+      <span class="friend-desc">记录代码与生活</span>
+    </span>
+  </a>
+  <a href="https://spiritx.xyz" target="_blank" rel="nofollow noopener" class="friend-card">
+    <img src="https://www.google.com/s2/favicons?domain=spiritx.xyz&amp;sz=96" class="friend-avatar" alt="Spirit">
+    <span class="friend-info">
+      <span class="friend-name">Spirit</span>
+      <span class="friend-desc">Keep Writing</span>
+    </span>
+  </a>
+  <a href="https://mikublog.com/" target="_blank" rel="nofollow noopener" class="friend-card">
+    <img src="https://www.google.com/s2/favicons?domain=mikublog.com&amp;sz=96" class="friend-avatar" alt="MikuBlog">
+    <span class="friend-info">
+      <span class="friend-name">MikuBlog</span>
+      <span class="friend-desc">专注于二次元与技术</span>
+    </span>
+  </a>
+</div>
 <h3>🪐 博客圈子</h3>
 <ul>
 <li>🚧 虚位以待，正在探索更多有趣的圈子...</li>
@@ -129,6 +144,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>👨‍💻 正在疯狂 Coding 中，即将上线...</li>
 </ul>
 <hr>
+<div class="apply-rules-box">
 <h3>🤝 友链申请</h3>
 <p><strong>申请前记得先添加本站哦~</strong></p>
 <p>✅ <strong>基础要求</strong>：</p>
@@ -145,9 +161,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><strong>📝 申请格式：</strong></p>
 <p>请直接在评论区留言：</p>
 <div class="highlight highlight-source-yaml"><pre class="notranslate">- <span class="pl-ent">name</span>: <span class="pl-s">Gitiu's Blog</span>
-- <span class="pl-ent">url</span>: <span class="pl-s">[https://www.gitiu.com](https://www.gitiu.com)</span>
+- <span class="pl-ent">url</span>: <span class="pl-s">https://www.gitiu.com</span>
 - <span class="pl-ent">avatar</span>: <span class="pl-s">(选填)</span>
-- <span class="pl-ent">desc</span>: <span class="pl-s">谁能预测未来!</span></pre></div></div>
+- <span class="pl-ent">desc</span>: <span class="pl-s">谁能预测未来!</span></pre></div>
+</div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
@@ -222,11 +239,11 @@ function openComments(){
     script.setAttribute("src","https://utteranc.es/client.js");
     script.setAttribute("repo","gitiu/gitiu.github.io");
     script.setAttribute("issue-term","title");
-    
+
     if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
     else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
     else{script.setAttribute("theme","preferred-color-scheme");}
-    
+
     script.setAttribute("crossorigin","anonymous");
     script.setAttribute("async","");
     cm.appendChild(script);
@@ -312,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
-<script src='https://blog.meekdai.com/Gmeek/plugins/articletoc.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
+<script src='/plugins/articletoc.js'></script><script src='/plugins/lightbox.js'></script>
 
+<script src='/gitiu-bento.js?v=20260608ac'></script>
 </html>

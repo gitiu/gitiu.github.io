@@ -1,6 +1,11 @@
 name: build Gmeek
 
 on:
+  push:
+    paths:
+      - "config.json"
+      - "static/**"
+      - ".github/workflows/Gmeek.yml"
   workflow_dispatch:
   issues:
     types: [opened, edited]
@@ -35,11 +40,16 @@ jobs:
 
       - name: Clone source code
         run: |
+          GMEEK_REPOSITORY=$(jq -r ".GMEEK_REPOSITORY // \"Meekdai/Gmeek\"" config.json)
           GMEEK_VERSION=$(jq -r ".GMEEK_VERSION" config.json)
-          git clone https://github.com/Meekdai/Gmeek.git /opt/Gmeek;
+          git clone https://github.com/${GMEEK_REPOSITORY}.git /opt/Gmeek;
           cd /opt/Gmeek/
-          lastTag=$(git describe --tags `git rev-list --tags --max-count=1`)
-          if [ $GMEEK_VERSION == 'last' ]; then git checkout $lastTag; else git checkout $GMEEK_VERSION; fi;
+          if [ "$GMEEK_VERSION" = 'last' ]; then
+            lastTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+            git checkout $lastTag
+          else
+            git checkout $GMEEK_VERSION
+          fi;
 
       - name: Install dependencies
         run: |
@@ -51,7 +61,29 @@ jobs:
           cp -r ./* /opt/Gmeek/
           cd /opt/Gmeek/
           python Gmeek.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} --issue_number '${{ github.event.issue.number }}'
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          base = json.loads(Path("blogBase.json").read_text(encoding="utf-8"))
+          output = {"labelColorDict": base.get("labelColorDict", {})}
+          for key, item in base.get("postListJson", {}).items():
+              output[key] = {
+                  "labels": item.get("labels", []),
+                  "postTitle": item.get("postTitle", ""),
+                  "postUrl": item.get("postUrl", ""),
+                  "createdDate": item.get("createdDate", ""),
+                  "dateLabelColor": item.get("dateLabelColor", ""),
+                  "commentNum": item.get("commentNum", 0),
+                  "description": item.get("description", ""),
+              }
+
+          meta = json.dumps(output, ensure_ascii=False, indent=2) + "\n"
+          Path("static/gitiu-post-meta.json").write_text(meta, encoding="utf-8")
+          Path("docs/gitiu-post-meta.json").write_text(meta, encoding="utf-8")
+          PY
           cp -a /opt/Gmeek/docs ${{ github.workspace }} 
+          cp /opt/Gmeek/static/gitiu-post-meta.json ${{ github.workspace }}/static/gitiu-post-meta.json
           cp -a /opt/Gmeek/backup ${{ github.workspace }} 
           cp /opt/Gmeek/blogBase.json ${{ github.workspace }} 
           

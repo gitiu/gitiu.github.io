@@ -83,6 +83,9 @@ jobs:
           Path("docs/gitiu-post-meta.json").write_text(meta, encoding="utf-8")
           PY
           cp -a /opt/Gmeek/docs ${{ github.workspace }} 
+          if [ -d /opt/Gmeek/static/pages ]; then
+            cp -a /opt/Gmeek/static/pages/. ${{ github.workspace }}/docs/
+          fi
           cp /opt/Gmeek/static/gitiu-post-meta.json ${{ github.workspace }}/static/gitiu-post-meta.json
           cp -a /opt/Gmeek/backup ${{ github.workspace }} 
           cp /opt/Gmeek/blogBase.json ${{ github.workspace }} 

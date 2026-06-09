@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gitiu Blog Design Preview</title>
+  <style>
+    :root {
+      --ink: #202124;
+      --muted: #69707d;
+      --line: #e6e8ec;
+      --paper: #ffffff;
+      --soft: #f6f7f9;
+      --blue: #2563eb;
+      --green: #16803c;
+      --pink: #d9469d;
+      --cyan: #088395;
+      --violet: #6d5dfc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f4f5f7;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .preview-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .preview-header h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+
+    .preview-header p {
+      max-width: 560px;
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .preview-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preview-tabs a {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 7px 10px;
+      border-radius: 6px;
+      color: #444b57;
+      font-size: 13px;
+    }
+
+    .concept {
+      margin-top: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .concept-note {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfbfc;
+    }
+
+    .concept-note h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .concept-note p {
+      max-width: 680px;
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .mock {
+      min-height: 640px;
+      padding: 34px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 20px;
+      white-space: nowrap;
+    }
+
+    .badge.talk {
+      color: #9d2b72;
+      background: #fde8f5;
+    }
+
+    .badge.article {
+      color: #33646d;
+      background: #e8f4f5;
+    }
+
+    .badge.repost {
+      color: #196f3d;
+      background: #e7f7ee;
+    }
+
+    .badge.date {
+      color: #4b5563;
+      background: #eef0f3;
+    }
+
+    .badge.count {
+      color: #075985;
+      background: #e0f2fe;
+    }
+
+    .icon-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .icon-button {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid transparent;
+      border-radius: 7px;
+      color: #4b5563;
+    }
+
+    .icon-button:hover {
+      border-color: var(--line);
+      background: #fff;
+    }
+
+    .icon-button svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .bento {
+      --bento-page: #f7f4ed;
+      --bento-card: rgba(255, 255, 255, 0.78);
+      --bento-card-strong: #ffffff;
+      --bento-ink: #1f2328;
+      --bento-muted: #687181;
+      --bento-line: rgba(43, 38, 31, 0.09);
+      --bento-shadow: 0 8px 24px rgba(133, 120, 100, 0.05), 0 2px 6px rgba(133, 120, 100, 0.03);
+      --bento-button: rgba(255, 255, 255, 0.72);
+      --bento-button-hover: #ffffff;
+      --bento-accent: #8a5a2b;
+      --bento-accent-ink: #ffffff;
+      --bento-post-hover: rgba(255, 255, 255, 0.54);
+      background: var(--bento-page);
+      color: var(--bento-ink);
+      transition: background 260ms ease, color 260ms ease;
+    }
+
+    .bento.is-night {
+      --bento-page: #090d16;
+      --bento-card: rgba(10, 16, 28, 0.9);
+      --bento-card-strong: rgba(16, 24, 39, 0.88);
+      --bento-ink: #f2f6fc;
+      --bento-muted: #a9b7ca;
+      --bento-line: rgba(255, 255, 255, 0.13);
+      --bento-shadow: none;
+      --bento-button: rgba(255, 255, 255, 0.08);
+      --bento-button-hover: rgba(255, 255, 255, 0.14);
+      --bento-accent: #7dd3fc;
+      --bento-accent-ink: #07111f;
+      --bento-post-hover: rgba(255, 255, 255, 0.06);
+    }
+
+    .bento.is-night .concept-note {
+      background: #0d1320;
+      border-bottom-color: var(--bento-line);
+    }
+
+    .bento.is-night .concept-note p {
+      color: var(--bento-muted);
+    }
+
+    .bento .mock {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(247, 244, 237, 0.2)),
+        var(--bento-page);
+      transition: background 260ms ease;
+    }
+
+    .bento.is-night .mock {
+      background:
+        radial-gradient(circle at 14% 18%, rgba(56, 189, 248, 0.16), transparent 28%),
+        radial-gradient(circle at 86% 10%, rgba(168, 85, 247, 0.17), transparent 26%),
+        var(--bento-page);
+    }
+
+    .bento.is-night .mock::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 82%);
+      pointer-events: none;
+    }
+
+    .bento-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 1.65fr;
+      gap: 14px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .bento-card {
+      background: var(--bento-card);
+      border: 1px solid var(--bento-line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--bento-shadow);
+      transition: background 260ms ease, border-color 260ms ease, box-shadow 260ms ease, transform 180ms ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .bento:not(.is-night) .bento-card:hover {
+      box-shadow: 0 12px 30px rgba(133, 120, 100, 0.08), 0 2px 8px rgba(133, 120, 100, 0.04);
+    }
+
+    .bento.is-night .bento-card {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .bento.is-night .bento-card:hover {
+      border-color: rgba(125, 211, 252, 0.24);
+    }
+
+    .profile-card {
+      min-height: 250px;
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid rgba(32, 33, 36, 0.08);
+    }
+
+    .profile-card h3 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0;
+      color: var(--bento-ink);
+    }
+
+    .profile-card p {
+      margin: 18px 0 0;
+      color: var(--bento-muted);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      position: relative;
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .stat + .stat::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: -9px;
+      width: 1px;
+      background: var(--bento-line);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--bento-ink);
+      font-size: 25px;
+      line-height: 1;
+    }
+
+    .stat span {
+      color: var(--bento-muted);
+      font-size: 12px;
+    }
+
+    .stat strong,
+    .stat span {
+      transition: color 180ms ease;
+    }
+
+    .stat:hover strong {
+      color: var(--bento-accent);
+    }
+
+    .bento-list {
+      grid-row: span 2;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: var(--bento-muted);
+      font-size: 13px;
+    }
+
+    .bento-toggle {
+      border: 1px solid var(--bento-line);
+      background: var(--bento-button);
+      color: var(--bento-ink);
+      cursor: pointer;
+      font: inherit;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .bento-toggle:hover {
+      background: var(--bento-button-hover);
+      transform: translateY(-1px);
+    }
+
+    .bento .icon-button {
+      border-color: var(--bento-line);
+      background: var(--bento-button);
+      color: var(--bento-ink);
+      transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+    }
+
+    .bento .icon-button:hover {
+      background: var(--bento-button-hover);
+      color: var(--bento-accent);
+      transform: translateY(-1px);
+    }
+
+    .bento.is-night .icon-button {
+      color: #dbeafe;
+      opacity: 0.96;
+    }
+
+    .bento-post {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      margin: 0 -8px;
+      padding: 16px 8px;
+      border-top: 1px solid var(--bento-line);
+      border-radius: 7px;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .bento-post:first-of-type {
+      border-top: 0;
+    }
+
+    .bento-post h4 {
+      margin: 0;
+      color: var(--bento-ink);
+      font-size: 18px;
+      letter-spacing: 0;
+      display: inline;
+      background-image: linear-gradient(90deg, var(--bento-accent), transparent);
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0 2px;
+      transition: color 180ms ease, background-size 180ms ease;
+    }
+
+    .bento-post p {
+      margin: 7px 0 0;
+      color: var(--bento-muted);
+      font-size: 13px;
+    }
+
+    .bento-post:hover {
+      background: var(--bento-post-hover);
+      transform: translateY(-1px);
+    }
+
+    .bento-post:hover h4 {
+      color: var(--bento-accent);
+      background-size: 100% 2px;
+    }
+
+    .bento.is-night .bento-post p,
+    .bento.is-night .quote {
+      color: #c1ccdc;
+    }
+
+    .bento-post > div:last-child {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: end;
+    }
+
+    .quick-card {
+      min-height: 145px;
+    }
+
+    .quote {
+      margin: 14px 0 0;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .bento-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .bento-link {
+      border: 1px solid var(--bento-line);
+      border-radius: 999px;
+      background: var(--bento-button);
+      color: var(--bento-ink);
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 650;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .bento-link:hover {
+      border-color: var(--bento-accent);
+      background: var(--bento-accent);
+      color: var(--bento-accent-ink);
+      transform: translateY(-1px);
+    }
+
+    .bento-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--bento-line);
+      color: var(--bento-muted);
+      font-size: 13px;
+    }
+
+    .bento-more {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      border: 1px solid var(--bento-line);
+      border-radius: 999px;
+      background: var(--bento-button);
+      color: var(--bento-ink);
+      padding: 0 12px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+    }
+
+    .bento-more:hover {
+      border-color: var(--bento-accent);
+      background: var(--bento-accent);
+      color: var(--bento-accent-ink);
+      transform: translateY(-1px);
+    }
+
+    .bento-article-preview {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 14px auto 0;
+      padding: 26px;
+    }
+
+    .article-preview-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--bento-line);
+    }
+
+    .article-preview-head h3 {
+      margin: 0;
+      color: var(--bento-ink);
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+
+    .article-preview-head p {
+      margin: 8px 0 0;
+      color: var(--bento-muted);
+      font-size: 14px;
+    }
+
+    .article-preview-body {
+      max-width: 680px;
+      margin-top: 20px;
+      color: var(--bento-muted);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .article-preview-body blockquote {
+      margin: 18px 0 0;
+      border-left: 3px solid var(--bento-accent);
+      padding-left: 14px;
+      color: var(--bento-ink);
+    }
+
+    .bento.is-night .badge {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #dbeafe;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .magazine {
+      background: #fbfbfa;
+    }
+
+    .magazine .mock {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fbfbfa;
+    }
+
+    .mag-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: start;
+      padding-bottom: 26px;
+      border-bottom: 1px solid #dfe2e6;
+    }
+
+    .mag-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mag-title img {
+      width: 54px;
+      height: 54px;
+    }
+
+    .mag-title h3 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .mag-sub {
+      max-width: 520px;
+      margin: 18px 0 0;
+      color: #5d6673;
+      font-size: 15px;
+    }
+
+    .mag-list {
+      margin-top: 28px;
+    }
+
+    .mag-item {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: baseline;
+      padding: 18px 0;
+      border-bottom: 1px solid #ebecef;
+    }
+
+    .mag-date {
+      color: #8a92a0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+    }
+
+    .mag-item h4 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 680;
+      letter-spacing: 0;
+    }
+
+    .mag-item p {
+      margin: 7px 0 0;
+      color: #747b87;
+      font-size: 14px;
+    }
+
+    .mag-item:hover h4 {
+      transform: translateX(4px);
+    }
+
+    .mag-item h4 {
+      transition: transform 180ms ease;
+    }
+
+    .glow {
+      color: #e8eef8;
+      background: #090d16;
+    }
+
+    .glow .concept-note {
+      color: #e8eef8;
+      background: #0d1320;
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .glow .concept-note p {
+      color: #9facbf;
+    }
+
+    .glow .mock {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(60, 160, 255, 0.22), transparent 32%),
+        radial-gradient(circle at 82% 5%, rgba(174, 92, 255, 0.18), transparent 28%),
+        #090d16;
+    }
+
+    .glow .mock::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 80%);
+      pointer-events: none;
+    }
+
+    .glow-inner {
+      position: relative;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 4px;
+    }
+
+    .glass-panel {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: rgba(13, 19, 32, 0.68);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(14px);
+    }
+
+    .glow-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glow-name {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .glow-name h3 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+
+    .glow-name p {
+      margin: 4px 0 0;
+      color: #9facbf;
+      font-size: 14px;
+    }
+
+    .glow-list {
+      padding: 8px 18px 18px;
+    }
+
+    .glow-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glow-item:last-child {
+      border-bottom: 0;
+    }
+
+    .glow-item h4 {
+      margin: 0;
+      color: #f7fbff;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .glow-item p {
+      margin: 6px 0 0;
+      color: #9facbf;
+      font-size: 13px;
+    }
+
+    .glow .badge {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #dbeafe;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 760px) {
+      .preview-shell {
+        padding: 18px 10px 40px;
+      }
+
+      .preview-header,
+      .concept-note,
+      .mag-top,
+      .glow-head {
+        display: block;
+      }
+
+      .mock {
+        padding: 18px 10px;
+        min-height: 0;
+      }
+
+      .bento-grid {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .bento-card {
+        margin-bottom: 10px;
+      }
+
+      .profile-card {
+        order: 1;
+      }
+
+      .bento-list {
+        order: 2;
+      }
+
+      .quick-card {
+        order: 3;
+      }
+
+      .bento-post {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .bento-post > div:last-child {
+        justify-content: start;
+      }
+
+      .bento-pagination,
+      .article-preview-head {
+        display: block;
+      }
+
+      .bento-more {
+        margin-top: 10px;
+      }
+
+      .mag-title h3 {
+        font-size: 28px;
+      }
+
+      .mag-item {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 6px;
+      }
+
+      .mag-item h4 {
+        font-size: 20px;
+      }
+
+      .glow-head .icon-row,
+      .mag-top .icon-row {
+        margin-top: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="preview-shell">
+    <header class="preview-header">
+      <div>
+        <h1>Gitiu's Blog 设计方向预览</h1>
+        <p>这是独立预览页，不影响当前首页。三种方向都使用你的真实文章标题、标签和日期，先看气质，再决定是否进入 Gmeek 模板实现。</p>
+      </div>
+      <nav class="preview-tabs" aria-label="设计方向">
+        <a href="#bento">Bento Grid</a>
+        <a href="#magazine">极简杂志风</a>
+        <a href="#glow">Glass / Glow</a>
+      </nav>
+    </header>
+
+    <section class="concept bento" id="bento">
+      <div class="concept-note">
+        <div>
+          <h2>思路一：Bento Grid</h2>
+          <p>适合把文章、说说、关于、友链拆成模块。更像个人主页，不只是文章列表。</p>
+        </div>
+        <span class="badge date">现代 / 信息卡片 / 轻社交</span>
+      </div>
+      <div class="mock">
+        <div class="bento-grid">
+          <article class="bento-card profile-card">
+            <div class="profile-top">
+              <img class="avatar" src="cat.svg" alt="Gitiu avatar">
+              <div>
+                <h3>Gitiu's Blog</h3>
+                <span class="badge date">我的生活际遇</span>
+              </div>
+            </div>
+            <p>记录生活、短句、旅途、夜晚和一些还没有被归类的瞬间。</p>
+            <div class="stat-row">
+              <a class="stat" href="tag.html#文章"><strong>13</strong><span>文章</span></a>
+              <a class="stat" href="tag.html"><strong>2</strong><span>评论</span></a>
+              <a class="stat" href="about.html"><strong>2419</strong><span>运行天数</span></a>
+            </div>
+          </article>
+          <article class="bento-card bento-list">
+            <div class="section-title">
+              <span>最近更新</span>
+              <div class="icon-row">
+                <a class="icon-button" href="tag.html" title="搜索">⌕</a>
+                <button class="icon-button bento-toggle" type="button" data-bento-toggle title="切换夜间模式">☾</button>
+              </div>
+            </div>
+            <a class="bento-post" href="post/xi-yang-yu-luo-ri.html">
+              <div>
+                <h4>夕阳与落日</h4>
+                <p>发朋友圈，但是发出去，感觉无人在意了。</p>
+              </div>
+              <div><span class="badge talk">说说</span> <span class="badge date">2026-01-05</span></div>
+            </a>
+            <a class="bento-post" href="post/2026.html">
+              <div>
+                <h4>2026</h4>
+                <p>淡然。</p>
+              </div>
+              <div><span class="badge talk">说说</span> <span class="badge date">2026-01-01</span></div>
+            </a>
+            <a class="bento-post" href="post/40-ge-wen-ti.html">
+              <div>
+                <h4>40个问题</h4>
+                <p>一年结束时，给自己留下的一组问题。</p>
+              </div>
+              <div><span class="badge count">1</span> <span class="badge repost">转载</span> <span class="badge date">2025-12-03</span></div>
+            </a>
+            <a class="bento-post" href="post/kan-hai.html">
+              <div>
+                <h4>看海</h4>
+                <p>最近很热，然后大家都热。随便拍拍。</p>
+              </div>
+              <div><span class="badge article">文章</span> <span class="badge date">2025-07-06</span></div>
+            </a>
+            <div class="bento-pagination">
+              <span>显示最新 4 篇</span>
+              <a class="bento-more" href="page2.html">更多文章</a>
+            </div>
+          </article>
+          <article class="bento-card quick-card">
+            <div class="section-title"><span>最新说说</span><span class="badge talk">短动态</span></div>
+            <p class="quote">“夕阳无限好，只是一个人。”</p>
+          </article>
+          <article class="bento-card quick-card">
+            <div class="section-title"><span>入口</span><span class="badge date">Link</span></div>
+            <div class="bento-links">
+              <a class="bento-link" href="about.html">关于</a>
+              <a class="bento-link" href="link.html">友链</a>
+              <a class="bento-link" href="rss.xml">RSS</a>
+              <a class="bento-link" href="tag.html">标签</a>
+            </div>
+          </article>
+        </div>
+        <article class="bento-card bento-article-preview">
+          <div class="article-preview-head">
+            <div>
+              <span class="badge article">文章页延展</span>
+              <h3>看海</h3>
+              <p>同一套温暖背景和卡片材质，但文章页保持单栏阅读，不做复杂 Bento。</p>
+            </div>
+            <span class="badge date">2025-07-06</span>
+          </div>
+          <div class="article-preview-body">
+            <p>最近很热，然后大家都热。随便拍拍。文章详情页可以使用更宽松的行高、克制的图片圆角，以及相同的暗色微光背景。</p>
+            <blockquote>首页负责探索，文章页负责安静阅读。</blockquote>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="concept magazine" id="magazine">
+      <div class="concept-note">
+        <div>
+          <h2>思路二：极简杂志风</h2>
+          <p>保留文章列表，但用更强的标题、日期秩序和留白。适合文字、生活记录、散文感内容。</p>
+        </div>
+        <span class="badge date">克制 / 阅读感 / 最稳</span>
+      </div>
+      <div class="mock">
+        <div class="mag-top">
+          <div>
+            <div class="mag-title">
+              <img src="cat.svg" alt="Gitiu avatar">
+              <h3>Gitiu's Blog</h3>
+            </div>
+            <p class="mag-sub">我的生活际遇。把时间放慢一点，让标题、日期、标签自己说话。</p>
+          </div>
+          <div class="icon-row">
+            <span class="icon-button">⌕</span>
+            <span class="icon-button">↗</span>
+            <span class="icon-button">☾</span>
+          </div>
+        </div>
+        <div class="mag-list">
+          <a class="mag-item" href="post/xi-yang-yu-luo-ri.html">
+            <span class="mag-date">2026.01.05</span>
+            <div>
+              <h4>夕阳与落日</h4>
+              <p>发朋友圈，但是发出去，感觉无人在意了。</p>
+            </div>
+            <span class="badge talk">说说</span>
+          </a>
+          <a class="mag-item" href="post/2026.html">
+            <span class="mag-date">2026.01.01</span>
+            <div>
+              <h4>2026</h4>
+              <p>淡然。</p>
+            </div>
+            <span class="badge talk">说说</span>
+          </a>
+          <a class="mag-item" href="post/40-ge-wen-ti.html">
+            <span class="mag-date">2025.12.03</span>
+            <div>
+              <h4>40个问题</h4>
+              <p>今年做了哪些之前从未做过的事？</p>
+            </div>
+            <span class="badge repost">转载</span>
+          </a>
+          <a class="mag-item" href="post/ta-zai-di-an-%EF%BC%8C-deng-wo-hui-tou.html">
+            <span class="mag-date">2025.08.12</span>
+            <div>
+              <h4>她在堤岸，等我回头</h4>
+              <p>那个地方是新疆，让我印象深刻。</p>
+            </div>
+            <span class="badge article">文章</span>
+          </a>
+          <a class="mag-item" href="post/kan-hai.html">
+            <span class="mag-date">2025.07.06</span>
+            <div>
+              <h4>看海</h4>
+              <p>最近很热，然后大家都热。随便拍拍。</p>
+            </div>
+            <span class="badge article">文章</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept glow" id="glow">
+      <div class="concept-note">
+        <div>
+          <h2>思路三：Glass / Glow</h2>
+          <p>科技感更强，但风险也更高。适合夜间模式和个人主页，文章阅读页需要更克制。</p>
+        </div>
+        <span class="badge">暗色 / 微光 / 数字感</span>
+      </div>
+      <div class="mock">
+        <div class="glow-inner">
+          <div class="glass-panel">
+            <header class="glow-head">
+              <div class="glow-name">
+                <img class="avatar" src="cat.svg" alt="Gitiu avatar">
+                <div>
+                  <h3>Gitiu's Blog</h3>
+                  <p>我的生活际遇 / running 2419 days</p>
+                </div>
+              </div>
+              <div class="icon-row">
+                <span class="icon-button">⌕</span>
+                <span class="icon-button">↗</span>
+                <span class="icon-button">☾</span>
+              </div>
+            </header>
+            <div class="glow-list">
+              <a class="glow-item" href="post/xi-yang-yu-luo-ri.html">
+                <div>
+                  <h4>夕阳与落日</h4>
+                  <p>短句 / 生活瞬间 / 2026-01-05</p>
+                </div>
+                <span class="badge">说说</span>
+              </a>
+              <a class="glow-item" href="post/2026.html">
+                <div>
+                  <h4>2026</h4>
+                  <p>短句 / 新年 / 2026-01-01</p>
+                </div>
+                <span class="badge">说说</span>
+              </a>
+              <a class="glow-item" href="post/40-ge-wen-ti.html">
+                <div>
+                  <h4>40个问题</h4>
+                  <p>年度问题 / 自我复盘 / 2025-12-03</p>
+                </div>
+                <span class="badge">转载</span>
+              </a>
+              <a class="glow-item" href="post/kan-hai.html">
+                <div>
+                  <h4>看海</h4>
+                  <p>图片 / 旅行 / 2025-07-06</p>
+                </div>
+                <span class="badge">文章</span>
+              </a>
+              <a class="glow-item" href="post/yao-zhi-hai.html">
+                <div>
+                  <h4>要之海</h4>
+                  <p>短句 / 心情 / 2024-11-15</p>
+                </div>
+                <span class="badge">说说</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const bentoSection = document.querySelector("#bento");
+    const bentoToggle = document.querySelector("[data-bento-toggle]");
+
+    bentoToggle?.addEventListener("click", () => {
+      bentoSection.classList.toggle("is-night");
+      bentoToggle.textContent = bentoSection.classList.contains("is-night") ? "☀" : "☾";
+    });
+  </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 (function () {
-  const BENTO_VERSION = "20260608ac";
+  const BENTO_VERSION = "20260609a";
   if (window.__gitiuBentoReady === BENTO_VERSION) return;
   window.__gitiuBentoReady = BENTO_VERSION;
   window.__gitiuBentoVersion = BENTO_VERSION;
@@ -9,6 +9,15 @@
   const isTalkPage = /\/talk\.html$/.test(location.pathname);
 
   let postDataCache = null;
+
+  function ensureDesignCssLast() {
+    const href = `/gitiu-bento.css?v=${BENTO_VERSION}`;
+    document.querySelectorAll('link[href*="gitiu-bento.css"]').forEach((link) => link.remove());
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.documentElement.appendChild(link);
+  }
 
   function safeDecode(value) {
     try {
@@ -572,6 +581,7 @@
   }
 
   async function boot() {
+    ensureDesignCssLast();
     removeFooterRunDay();
     await applyHome();
     await applyTalkPage();

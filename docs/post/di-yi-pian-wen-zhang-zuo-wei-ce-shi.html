@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
-
+    <link rel='stylesheet' href='/gitiu-bento.css?v=20260608ac' />
     <link rel="icon" href="https://raw.githubusercontent.com/gitiu/gitiu.github.io/refs/heads/main/static/cat.svg"><script>
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
@@ -24,7 +24,6 @@
 <link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
-    <link rel='stylesheet' href='/gitiu-bento.css?v=20260608ac' />
 </head>
 <style>
 body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
@@ -71,7 +70,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
             <path id="pathHome" fill-rule="evenodd"></path>
         </svg>
     </a>
-
+    
 
     <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
         <svg class="octicon" width="16" height="16" >
@@ -331,7 +330,7 @@ function utterancesTheme(theme){
     iframe.contentWindow.postMessage(message,'https://utteranc.es');
 }
 if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
-console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+console.log("\n %c Gmeek main https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
 </script>
 
 <script>
@@ -353,11 +352,11 @@ function openComments(){
     script.setAttribute("src","https://utteranc.es/client.js");
     script.setAttribute("repo","gitiu/gitiu.github.io");
     script.setAttribute("issue-term","title");
-
+    
     if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
     else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
     else{script.setAttribute("theme","preferred-color-scheme");}
-
+    
     script.setAttribute("crossorigin","anonymous");
     script.setAttribute("async","");
     cm.appendChild(script);
@@ -443,7 +442,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
-<script src='/plugins/articletoc.js'></script><script src='/plugins/lightbox.js'></script><script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src='/plugins/articletoc.js'></script><script src='/plugins/lightbox.js'></script><script src='/gitiu-bento.js?v=20260608ac'></script><script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-<script src='/gitiu-bento.js?v=20260608ac'></script>
 </html>

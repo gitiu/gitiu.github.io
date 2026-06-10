@@ -1,7 +1,7 @@
 {
     "title": "Gitiu's Blog",
     "subTitle": "我的生活际遇！",
-    "avatarUrl": "https://raw.githubusercontent.com/gitiu/gitiu.github.io/refs/heads/main/static/cat.svg",
+    "avatarUrl": "/cat.svg",
     "homeUrl": "https://www.gitiu.com",
     "filingNum": "苏ICP备19040799号-2",
     "singlePage": ["link", "about"],
@@ -13,7 +13,7 @@
     "i18n": "CN",
     "nightTheme": "dark_colorblind",
     "primerCSS": "<link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />",
-    "allHead": "<link rel='stylesheet' href='/gitiu-bento.css?v=20260610b' /><script defer src='/gitiu-bento.js?v=20260610b'></script>",
+    "allHead": "<link rel='stylesheet' href='/gitiu-bento.css?v=20260610c' /><script defer src='/gitiu-bento.js?v=20260610c'></script>",
     "script": "<script src='/plugins/articletoc.js'></script><script src='/plugins/lightbox.js'></script>",
     "GMEEK_REPOSITORY": "gitiu/Gmeek",
     "GMEEK_VERSION": "main",

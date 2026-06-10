@@ -32,7 +32,9 @@ html[data-color-mode="auto"] {
 }
 
 html {
+  max-width: 100%;
   min-height: 100%;
+  overflow-x: clip;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(247, 244, 237, 0.2)),
     var(--gitiu-page);
@@ -61,7 +63,9 @@ html[data-color-mode="auto"]::before {
 }
 
 body {
+  width: 100%;
   max-width: 1120px !important;
+  overflow-x: clip;
   margin: 0 auto !important;
   padding: 34px 34px 48px !important;
   color: var(--gitiu-ink);
@@ -710,6 +714,19 @@ html[data-color-mode="auto"] .gitiu-quote {
   max-height: 82vh;
   margin: 18px auto;
   border-radius: 8px;
+}
+
+#postBody pre,
+#postBody code,
+#postBody .highlight,
+#postBody .snippet-clipboard-content {
+  max-width: 100%;
+}
+
+#postBody pre,
+#postBody .highlight,
+#postBody .snippet-clipboard-content {
+  overflow-x: auto;
 }
 
 #postBody.markdown-body blockquote {
@@ -1417,6 +1434,12 @@ body > div[style*="position: fixed"] {
 }
 
 @media (max-width: 760px) {
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
   body {
     padding: 18px 8px 20px !important;
   }
@@ -1578,6 +1601,16 @@ body > div[style*="position: fixed"] {
     padding: 18px 14px;
   }
 
+  #postBody code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  #postBody pre code {
+    white-space: pre;
+    overflow-wrap: normal;
+  }
+
   .postTitle {
     font-size: 28px;
   }
@@ -1612,6 +1645,37 @@ body > div[style*="position: fixed"] {
 
   .gitiu-card-page .subnav-search-input {
     width: 100% !important;
+  }
+
+  .toc,
+  #toc,
+  .tocbot,
+  .postToc,
+  #postToc {
+    left: auto !important;
+    right: 8px !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+
+  .toc-icon,
+  #articletoc,
+  .articletoc {
+    right: 8px !important;
+    left: auto !important;
+  }
+
+  .lb-lightbox-overlay,
+  .lb-lightbox-content-wrapper,
+  .lb-lightbox-container,
+  .lb-lightbox-image-wrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  .lb-lightbox-next,
+  .lb-lightbox-close {
+    right: 10px !important;
+    left: auto !important;
   }
 }
 

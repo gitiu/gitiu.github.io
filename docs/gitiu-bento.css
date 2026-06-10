@@ -182,7 +182,7 @@ html[data-color-mode="auto"] .comments {
 
 #footer {
   flex-shrink: 0;
-  margin: auto auto 0;
+  margin: 14px auto 0;
   max-width: 980px;
   width: 100%;
   padding: 16px;
@@ -218,6 +218,8 @@ html[data-color-mode="auto"] .Counter {
 }
 
 .gitiu-home #content {
+  display: flex;
+  flex-direction: column;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -231,8 +233,42 @@ html[data-color-mode="auto"] .Counter {
   display: grid;
   grid-template-columns: 1.05fr 1.65fr;
   gap: 14px;
+  flex: 1 0 auto;
   max-width: 980px;
+  width: 100%;
   margin: 0 auto;
+}
+
+@media (min-width: 761px) and (min-height: 820px) {
+  .gitiu-home .gitiu-bento-grid {
+    min-height: max(520px, calc(100dvh - 34px - 24px - 77px - 14px));
+    grid-template-rows: minmax(0, 1fr) minmax(145px, auto);
+  }
+
+  .gitiu-home .gitiu-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gitiu-home .gitiu-profile-card {
+    justify-content: space-between;
+  }
+
+  .gitiu-home .gitiu-post-card {
+    min-height: 0;
+  }
+
+  .gitiu-home .gitiu-post-list {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .gitiu-home .gitiu-post-item {
+    flex: 1 1 auto;
+    align-content: center;
+  }
 }
 
 .gitiu-card {
@@ -1496,7 +1532,7 @@ body > div[style*="position: fixed"] {
   }
 
   #footer {
-    margin-top: auto;
+    margin-top: 10px;
   }
 
   .gitiu-post-item {

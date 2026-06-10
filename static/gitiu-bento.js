@@ -1,5 +1,5 @@
 (function () {
-  const BENTO_VERSION = "20260610c";
+  const BENTO_VERSION = "20260610d";
   if (window.__gitiuBentoReady === BENTO_VERSION) return;
   window.__gitiuBentoReady = BENTO_VERSION;
   window.__gitiuBentoVersion = BENTO_VERSION;

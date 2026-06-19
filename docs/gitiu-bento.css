@@ -757,7 +757,11 @@ html[data-color-mode="auto"] .gitiu-quote {
 
 #postBody.markdown-body img {
   display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
   max-height: 82vh;
+  object-fit: contain;
   margin: 18px auto;
   border-radius: 8px;
 }

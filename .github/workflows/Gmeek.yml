@@ -89,6 +89,7 @@ jobs:
           cp /opt/Gmeek/static/gitiu-post-meta.json ${{ github.workspace }}/static/gitiu-post-meta.json
           cp -a /opt/Gmeek/backup ${{ github.workspace }} 
           cp /opt/Gmeek/blogBase.json ${{ github.workspace }} 
+          python ${{ github.workspace }}/static/gitiu-prerender.py
           
       - name: update html
         run: |

@@ -1,5 +1,5 @@
 (function () {
-  const BENTO_VERSION = "20260610e";
+  const BENTO_VERSION = "20260619a";
   if (window.__gitiuBentoReady === BENTO_VERSION) return;
   window.__gitiuBentoReady = BENTO_VERSION;
   window.__gitiuBentoVersion = BENTO_VERSION;
@@ -12,11 +12,17 @@
 
   function ensureDesignCssLast() {
     const href = `/gitiu-bento.css?v=${BENTO_VERSION}`;
-    document.querySelectorAll('link[href*="gitiu-bento.css"]').forEach((link) => link.remove());
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = href;
-    document.documentElement.appendChild(link);
+    const links = [...document.querySelectorAll('link[href*="gitiu-bento.css"]')];
+    let link = links.find((item) => item.getAttribute("href") === href || item.href.endsWith(href));
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+    }
+    document.head.appendChild(link);
+    links.forEach((item) => {
+      if (item !== link) item.remove();
+    });
   }
 
   function safeDecode(value) {
@@ -357,6 +363,10 @@
   async function applyHome() {
     if (!isHomePage) return;
     const content = document.querySelector("#content");
+    if (document.querySelector(".gitiu-bento-grid")) {
+      document.body.classList.add("gitiu-home");
+      return;
+    }
     const nav = document.querySelector(".SideNav");
     if (!content || !nav) return;
 
@@ -401,6 +411,10 @@
     if (!isTalkPage) return;
     const content = document.querySelector("#content");
     if (!content) return;
+    if (content.querySelector(".gitiu-talk-board")) {
+      document.body.classList.add("gitiu-talk-page");
+      return;
+    }
 
     const postData = await fetchPostData();
     const talks = postData.entries

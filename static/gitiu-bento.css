@@ -909,7 +909,8 @@ html[data-color-mode="auto"] .friend-avatar {
 }
 
 .gitiu-card-page #content {
-  max-width: 980px;
+  width: 100%;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 0;
   overflow: hidden;
@@ -924,7 +925,8 @@ html[data-color-mode="auto"] .friend-avatar {
 
 .gitiu-card-page #header {
   align-items: flex-start;
-  max-width: 980px;
+  width: 100%;
+  max-width: 1040px;
   margin: 0 auto 22px;
   gap: 18px;
   border-bottom: 0 !important;

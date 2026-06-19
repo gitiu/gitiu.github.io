@@ -5,7 +5,7 @@ from html import escape
 from pathlib import Path
 
 
-BENTO_VERSION = "20260619a"
+BENTO_VERSION = "20260619b"
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 

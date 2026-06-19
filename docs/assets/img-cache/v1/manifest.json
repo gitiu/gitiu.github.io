@@ -1,0 +1,71 @@
+{
+  "https://github.com/user-attachments/assets/63cf98a1-2938-47bd-a137-0ed7437cea3d": {
+    "lossless": false,
+    "quality": 88,
+    "source": "https://github.com/user-attachments/assets/63cf98a1-2938-47bd-a137-0ed7437cea3d",
+    "sourceBytes": 2834691,
+    "sourceContentType": "image/jpeg",
+    "sourceHeight": 3024,
+    "sourceWidth": 4032,
+    "variants": [
+      {
+        "bytes": 86596,
+        "height": 600,
+        "path": "/assets/img-cache/v1/9b45fc22decf890391-800.webp",
+        "width": 800
+      },
+      {
+        "bytes": 290438,
+        "height": 1200,
+        "path": "/assets/img-cache/v1/9b45fc22decf890391-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "https://github.com/user-attachments/assets/fd268480-c12f-4521-8961-be1857589e66": {
+    "lossless": false,
+    "quality": 88,
+    "source": "https://github.com/user-attachments/assets/fd268480-c12f-4521-8961-be1857589e66",
+    "sourceBytes": 2480959,
+    "sourceContentType": "image/jpeg",
+    "sourceHeight": 3024,
+    "sourceWidth": 4032,
+    "variants": [
+      {
+        "bytes": 69808,
+        "height": 600,
+        "path": "/assets/img-cache/v1/754b79137a329a6d7d-800.webp",
+        "width": 800
+      },
+      {
+        "bytes": 218482,
+        "height": 1200,
+        "path": "/assets/img-cache/v1/754b79137a329a6d7d-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "https://github.com/user-attachments/assets/fefeef76-990c-4f99-b2f4-79f34df8e108": {
+    "lossless": false,
+    "quality": 88,
+    "source": "https://github.com/user-attachments/assets/fefeef76-990c-4f99-b2f4-79f34df8e108",
+    "sourceBytes": 2575047,
+    "sourceContentType": "image/jpeg",
+    "sourceHeight": 5712,
+    "sourceWidth": 4284,
+    "variants": [
+      {
+        "bytes": 48906,
+        "height": 1067,
+        "path": "/assets/img-cache/v1/3e868a72b3f3acda65-800.webp",
+        "width": 800
+      },
+      {
+        "bytes": 133094,
+        "height": 2133,
+        "path": "/assets/img-cache/v1/3e868a72b3f3acda65-1600.webp",
+        "width": 1600
+      }
+    ]
+  }
+}

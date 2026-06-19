@@ -5,6 +5,7 @@ on:
     paths:
       - "config.json"
       - "static/**"
+      - "tools/**"
       - ".github/workflows/Gmeek.yml"
   workflow_dispatch:
   issues:
@@ -55,6 +56,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r /opt/Gmeek/requirements.txt
+          pip install "Pillow>=10,<11"
 
       - name: Generate new html
         run: |
@@ -90,6 +92,7 @@ jobs:
           cp -a /opt/Gmeek/backup ${{ github.workspace }} 
           cp /opt/Gmeek/blogBase.json ${{ github.workspace }} 
           python ${{ github.workspace }}/static/gitiu-prerender.py
+          python ${{ github.workspace }}/tools/gitiu-image-optimize.py
           
       - name: update html
         run: |

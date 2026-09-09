@@ -5,7 +5,7 @@ from html import escape
 from pathlib import Path
 
 
-BENTO_VERSION = "20260818a"
+BENTO_VERSION = "20260910f"
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
@@ -115,30 +115,36 @@ def profile_card(config, posts):
     try:
         start = datetime.strptime(config.get("startSite", "10/24/2019"), "%m/%d/%Y")
         run_days = (datetime.now() - start).days
+        start_label = start.strftime("%Y.%m.%d")
     except ValueError:
         run_days = 0
+        start_label = "—"
     title = escape(config.get("title", "Gitiu's Blog"))
-    avatar = escape(config.get("avatarUrl", "/cat.svg"))
     return f'''
     <article class="gitiu-card gitiu-profile-card">
       <div class="gitiu-profile-top">
-        <img class="gitiu-avatar" src="{avatar}" alt="avatar">
         <div>
-          <h1>{title}</h1>
-          <span class="Label" style="background-color:#eef0f3;color:#4b5563">我的生活际遇</span>
+          <h1><a class="gitiu-brand-link" href="index.html"><img class="gitiu-brand-logo" src="/logos/gitiu-cat.svg" width="240" height="72" alt="{title}"></a></h1>
+          <span class="gitiu-brand-subtitle"><img class="gitiu-slogan-art" src="/logos/gitiu-slogan.svg" width="240" height="40" alt="我的生活际遇"></span>
         </div>
       </div>
       <p>记录生活、短句、旅途、夜晚和一些还没有被归类的瞬间。</p>
-      <div class="gitiu-stat-row">
-        <div class="gitiu-stat"><strong>{len(posts)}</strong><span>文章</span></div>
-        <div class="gitiu-stat"><strong>{comments}</strong><span>评论</span></div>
-        <div class="gitiu-stat"><strong>{run_days}</strong><span>运行天数</span></div>
+      <div class="gitiu-notebook" aria-label="博客记录摘要">
+        <div class="gitiu-notebook-counts">
+          <div class="gitiu-notebook-entry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5l5 5M4 20l5-1L20 8a2.8 2.8 0 0 0-4-4L5 15l-1 5ZM13 20h7"/></svg><strong>{len(posts)}</strong><span>条记录</span></div>
+          <div class="gitiu-notebook-entry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 1-8 8H5l-3 3V11a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg><strong>{comments}</strong><span>条评论</span></div>
+        </div>
+        <div class="gitiu-notebook-time" aria-label="建站于 {start_label}，至今 {run_days} 天">
+          <span class="gitiu-notebook-thread" aria-hidden="true"></span>
+          <span class="gitiu-notebook-since"><span>始于</span> {start_label}</span>
+          <span class="gitiu-notebook-today"><span class="gitiu-notebook-day-prefix">第 </span><strong>{run_days}</strong> 天</span>
+        </div>
       </div>
       <div class="gitiu-profile-links">
         <span class="gitiu-card-subtle">探索</span>
         <div class="gitiu-links">
           {pill("about.html", "关于", "about")}
-          {pill("tag.html", "标签", "post")}
+          {pill("tag.html", "归档", "post")}
           {pill("link.html", "友链", "link")}
           {pill("rss.xml", "RSS", "rss")}
         </div>
@@ -189,31 +195,41 @@ def home_content(config, all_posts, page_posts):
 
 
 def talk_item(post):
+    date = post.get("createdDate", "")
+    month_day = date[5:].replace("-", ".") or "—"
     return f'''
       <a class="gitiu-talk-item" href="{escape(post.get("postUrl", "#"))}">
+        <time class="gitiu-talk-date" datetime="{escape(date)}">{escape(month_day)}</time>
         <div class="gitiu-talk-body">
-          <div class="gitiu-talk-meta">
-            <h2>{escape(post.get("postTitle", "未命名说说"))}</h2>
-            <time>{escape(post.get("createdDate", ""))}</time>
-          </div>
-          <p>{escape(summarize(post, 90))}</p>
+          <h3>{escape(post.get("postTitle", "未命名说说"))}</h3>
+          <p>{escape(summarize(post, 110))}</p>
         </div>
+        <span class="gitiu-talk-arrow" aria-hidden="true">↗</span>
       </a>'''
 
 
 def talk_content(posts):
     talks = [post for post in posts if "说说" in post.get("labels", [])]
+    years = {}
+    for post in talks:
+        years.setdefault(post.get("createdDate", "")[:4] or "未注明年份", []).append(post)
+    groups = "".join(
+        f'<section class="gitiu-talk-year"><h2 class="gitiu-year-heading">{escape(year)}<span>{len(items)} 条记录</span></h2>'
+        f'<div class="gitiu-talk-list">{"".join(talk_item(post) for post in items)}</div></section>'
+        for year, items in years.items()
+    )
     return f'''
 <div id="content">
   <section class="gitiu-talk-board">
     <div class="gitiu-talk-head">
       <div>
-        <span class="gitiu-card-subtle">短动态</span>
-        <h1>说说时间线</h1>
+        <span class="gitiu-card-subtle">{len(talks)} 条动态 · 按时间收藏</span>
+        <h1>说说<span class="gitiu-talk-title-dot">.</span></h1>
+        <p>生活里的小事，随手记下来。</p>
       </div>
       <a class="gitiu-link-pill" href="index.html">返回首页</a>
     </div>
-    <div class="gitiu-talk-list">{"".join(talk_item(post) for post in talks)}</div>
+    {groups}
   </section>
 </div>'''
 
@@ -231,8 +247,28 @@ def replace_content(html, content):
     return pattern.sub(content, html, count=1)
 
 
+def inject_theme_bootstrap(text):
+    # Resolve stored/system theme before any blocking stylesheet or body paint.
+    if "gitiu-bento.css" not in text:
+        return text
+    text = re.sub(r"\s*<!-- gitiu-theme-start -->.*?<!-- gitiu-theme-end -->\s*", "", text, flags=re.DOTALL)
+    bootstrap = """<!-- gitiu-theme-start -->
+<script>(function(){var r=document.documentElement,m='light';try{m=localStorage.getItem('meek_theme')||'light'}catch(e){}if(!['light','dark','auto'].includes(m))m='light';r.setAttribute('data-color-mode',m);r.setAttribute('data-gitiu-system-dark',String(matchMedia('(prefers-color-scheme: dark)').matches));})();</script>
+<style id="gitiu-first-paint">html{background-color:#f6f5f1;color:#30332e;color-scheme:light}html[data-color-mode="dark"]{background-color:#1c1e22;color:#dedfe3;color-scheme:dark}@media(prefers-color-scheme:dark){html[data-color-mode="auto"]{background-color:#1c1e22;color:#dedfe3;color-scheme:dark}}</style>
+<!-- gitiu-theme-end -->
+"""
+    # Keep the encoding declaration ahead of the inline bootstrap.
+    head = re.search(r"<head[^>]*>", text, re.IGNORECASE)
+    if not head:
+        return text
+    charset = re.search(r"<meta[^>]*(?:charset|http-equiv=[\"']content-type)[^>]*>", text[head.end():], re.IGNORECASE)
+    pos = head.end() + charset.end() if charset else head.end()
+    return text[:pos] + "\n" + bootstrap + text[pos:]
+
+
 def update_asset_versions(text):
-    return re.sub(r"gitiu-bento\.(css|js)\?v=[A-Za-z0-9_-]+", rf"gitiu-bento.\1?v={BENTO_VERSION}", text)
+    text = re.sub(r"gitiu-bento\.(css|js)\?v=[A-Za-z0-9_-]+", rf"gitiu-bento.\1?v={BENTO_VERSION}", text)
+    return re.sub(r"/plugins/lightbox\.js(?:\?v=[A-Za-z0-9_-]+)?", f"/plugins/lightbox.js?v={BENTO_VERSION}", text)
 
 
 def write_page(path, content, body_class):
@@ -253,6 +289,8 @@ def update_versions_everywhere():
                 continue
             text = path.read_text(encoding="utf-8")
             updated = update_asset_versions(text)
+            if path.suffix.lower() == ".html":
+                updated = inject_theme_bootstrap(updated)
             if updated != text:
                 path.write_text(updated, encoding="utf-8")
     for rel in ["config.json", "blogBase.json"]:

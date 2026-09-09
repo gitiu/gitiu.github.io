@@ -1,85 +1,60 @@
 :root {
-  --gitiu-page: #f7f4ed;
-  --gitiu-card: rgba(255, 255, 255, 0.78);
-  --gitiu-ink: #1f2328;
-  --gitiu-muted: #687181;
-  --gitiu-line: rgba(43, 38, 31, 0.09);
-  --gitiu-shadow: 0 8px 24px rgba(133, 120, 100, 0.05), 0 2px 6px rgba(133, 120, 100, 0.03);
+  --gitiu-page: #f6f5f1;
+  --gitiu-card: #fffefa;
+  --gitiu-ink: #30332e;
+  --gitiu-muted: #71766d;
+  --gitiu-line: rgba(53, 60, 44, 0.1);
+  --gitiu-shadow: 0 3px 16px rgba(60, 55, 40, 0.035);
+  --gitiu-radius: 14px;
   --gitiu-button: rgba(255, 255, 255, 0.72);
   --gitiu-button-hover: #ffffff;
-  --gitiu-accent: #8a5a2b;
+  --gitiu-accent: #8b6545;
   --gitiu-accent-ink: #ffffff;
-  --gitiu-post-hover: rgba(255, 255, 255, 0.54);
+  --gitiu-post-hover: rgba(139, 101, 69, 0.035);
 }
 
 html[data-color-mode="dark"],
-html[data-color-mode="auto"] {
-  --gitiu-page: #090d16;
-  --gitiu-card: rgba(10, 16, 28, 0.9);
-  --gitiu-ink: #f2f6fc;
-  --gitiu-muted: #a9b7ca;
-  --gitiu-line: rgba(255, 255, 255, 0.13);
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] {
+  --gitiu-page: #1c1e22;
+  --gitiu-card: #25282d;
+  --gitiu-ink: #dedfe3;
+  --gitiu-muted: #aaadb5;
+  --gitiu-line: rgba(223, 226, 233, 0.12);
   --gitiu-shadow: none;
-  --gitiu-button: rgba(255, 255, 255, 0.08);
-  --gitiu-button-hover: rgba(255, 255, 255, 0.14);
-  --gitiu-accent: #7dd3fc;
-  --gitiu-accent-ink: #07111f;
-  --gitiu-post-hover: rgba(255, 255, 255, 0.06);
+  --gitiu-button: rgba(255, 255, 255, 0.035);
+  --gitiu-button-hover: rgba(255, 255, 255, 0.07);
+  --gitiu-accent: #aabbd0;
+  --gitiu-accent-ink: #1c1e22;
+  --gitiu-post-hover: rgba(255, 255, 255, 0.035);
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
+html[data-color-mode] {
   max-width: 100%;
   min-height: 100%;
-  overflow-x: clip;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(247, 244, 237, 0.2)),
-    var(--gitiu-page);
-}
-
-html[data-color-mode="dark"],
-html[data-color-mode="auto"] {
-  background:
-    radial-gradient(circle at 14% 18%, rgba(56, 189, 248, 0.16), transparent 28%),
-    radial-gradient(circle at 86% 10%, rgba(168, 85, 247, 0.17), transparent 26%),
-    var(--gitiu-page);
-}
-
-html[data-color-mode="dark"]::before,
-html[data-color-mode="auto"]::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 52px 52px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 82%);
-  pointer-events: none;
+  scrollbar-gutter: stable;
+  background: var(--gitiu-page);
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  display: block;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  max-width: 1120px !important;
-  overflow-x: clip;
+  min-width: 0;
+  max-width: 1160px !important;
   margin: 0 auto !important;
-  padding: 34px 34px 24px !important;
+  padding: clamp(24px, 4vw, 56px) 32px 24px !important;
   color: var(--gitiu-ink);
   background: transparent;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   line-height: 1.62;
 }
 
 #content {
-  flex: 1 0 auto;
+  min-width: 0;
+  width: 100%;
 }
 
 a {
@@ -104,10 +79,10 @@ a {
 .gitiu-icon-button {
   display: inline-grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--gitiu-line);
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--gitiu-button);
   color: var(--gitiu-ink);
   padding: 0;
@@ -121,7 +96,6 @@ a {
   display: block;
   flex: 0 0 auto;
 }
-
 .title-right .circle:hover,
 .title-right .btn:hover,
 .gitiu-icon-button:hover {
@@ -131,13 +105,14 @@ a {
   transform: translateY(-1px);
 }
 
+
 html[data-color-mode="dark"] .title-right .circle,
-html[data-color-mode="auto"] .title-right .circle,
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .title-right .circle,
 html[data-color-mode="dark"] .title-right .btn,
-html[data-color-mode="auto"] .title-right .btn,
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .title-right .btn,
 html[data-color-mode="dark"] .gitiu-icon-button,
-html[data-color-mode="auto"] .gitiu-icon-button {
-  color: #dbeafe;
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .gitiu-icon-button {
+  color: var(--gitiu-ink);
   opacity: 0.96;
 }
 
@@ -149,7 +124,7 @@ html[data-color-mode="auto"] .gitiu-icon-button {
 .SideNav,
 .comments {
   border: 1px solid var(--gitiu-line);
-  border-radius: 8px;
+  border-radius: var(--gitiu-radius);
   background: var(--gitiu-card);
   box-shadow: var(--gitiu-shadow);
 }
@@ -161,31 +136,15 @@ html[data-color-mode="auto"] .gitiu-icon-button {
   box-shadow: none;
 }
 
-html[data-color-mode="dark"] #content,
-html[data-color-mode="auto"] #content,
-html[data-color-mode="dark"] #footer,
-html[data-color-mode="auto"] #footer,
-html[data-color-mode="dark"] .gitiu-card,
-html[data-color-mode="auto"] .gitiu-card,
-html[data-color-mode="dark"] #postBody,
-html[data-color-mode="auto"] #postBody,
-html[data-color-mode="dark"] #taglabel,
-html[data-color-mode="auto"] #taglabel,
-html[data-color-mode="dark"] .SideNav,
-html[data-color-mode="auto"] .SideNav,
-html[data-color-mode="dark"] .comments,
-html[data-color-mode="auto"] .comments {
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-#footer {
-  flex-shrink: 0;
-  margin: 14px auto 0;
-  max-width: 980px;
+body > #footer {
+  margin: 24px auto 0;
   width: 100%;
-  padding: 16px;
+  padding: 20px 0 0;
+  border: 0;
+  border-top: 1px solid var(--gitiu-line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   color: var(--gitiu-muted);
   font-size: 12px;
   line-height: 1.8;
@@ -193,7 +152,12 @@ html[data-color-mode="auto"] .comments {
 
 #footer a {
   color: inherit;
+  text-decoration: none;
 }
+#footer a:hover {
+  text-decoration: underline;
+}
+
 
 .Label,
 .Counter {
@@ -205,11 +169,11 @@ html[data-color-mode="auto"] .comments {
 }
 
 html[data-color-mode="dark"] .Label,
-html[data-color-mode="auto"] .Label,
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .Label,
 html[data-color-mode="dark"] .Counter,
-html[data-color-mode="auto"] .Counter {
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .Counter {
   border-color: rgba(255, 255, 255, 0.12);
-  color: #dbeafe !important;
+  color: var(--gitiu-ink) !important;
   background: rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -218,8 +182,7 @@ html[data-color-mode="auto"] .Counter {
 }
 
 .gitiu-home #content {
-  display: flex;
-  flex-direction: column;
+  display: block;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -231,64 +194,22 @@ html[data-color-mode="auto"] .Counter {
 
 .gitiu-bento-grid {
   display: grid;
-  grid-template-columns: 1.05fr 1.65fr;
-  gap: 14px;
-  flex: 1 0 auto;
-  max-width: 980px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.65fr);
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  gap: 20px;
   width: 100%;
   margin: 0 auto;
 }
 
-@media (min-width: 761px) and (min-height: 820px) {
-  .gitiu-home .gitiu-bento-grid {
-    flex-grow: 0;
-    min-height: clamp(520px, calc(100dvh - 34px - 24px - 77px - 14px), 780px);
-    grid-template-rows: minmax(0, 1fr) minmax(145px, auto);
-  }
-
-  .gitiu-home .gitiu-card {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .gitiu-home .gitiu-profile-card {
-    justify-content: space-between;
-  }
-
-  .gitiu-home .gitiu-post-card {
-    min-height: 0;
-  }
-
-  .gitiu-home .gitiu-post-list {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-
-  .gitiu-home .gitiu-post-item {
-    flex: 1 1 auto;
-    align-content: center;
-  }
-}
-
-@media (min-width: 1680px) {
-  body.gitiu-home {
-    max-width: 1320px !important;
-  }
-
-  .gitiu-home .gitiu-bento-grid,
-  .gitiu-home #footer {
-    max-width: 1180px;
-  }
-}
-
 .gitiu-card {
-  padding: 18px;
+  min-width: 0;
+  padding: 24px;
+  border-radius: var(--gitiu-radius);
 }
 
 .gitiu-profile-card {
-  min-height: 250px;
+  min-height: 0;
 }
 
 .gitiu-profile-top {
@@ -298,6 +219,7 @@ html[data-color-mode="auto"] .Counter {
 }
 
 .gitiu-avatar {
+  flex: 0 0 auto;
   width: 58px;
   height: 58px;
   border: 1px solid var(--gitiu-line);
@@ -306,7 +228,7 @@ html[data-color-mode="auto"] .Counter {
 }
 
 html[data-color-mode="dark"] .gitiu-avatar,
-html[data-color-mode="auto"] .gitiu-avatar {
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .gitiu-avatar {
   border-color: rgba(125, 211, 252, 0.2);
   background: rgba(15, 23, 42, 0.86);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.045), 0 0 24px rgba(125, 211, 252, 0.08);
@@ -316,7 +238,8 @@ html[data-color-mode="auto"] .gitiu-avatar {
 .gitiu-profile-card h1 {
   margin: 0;
   color: var(--gitiu-ink);
-  font-size: 28px;
+  font-size: clamp(23px, 2vw, 26px);
+  font-weight: 650;
   letter-spacing: 0;
   line-height: 1.2;
 }
@@ -330,6 +253,18 @@ html[data-color-mode="auto"] .gitiu-avatar {
 
 .gitiu-profile-card p {
   margin: 18px 0 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.gitiu-profile-top .Label {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+  color: var(--gitiu-muted) !important;
+  font-weight: 400;
 }
 
 .gitiu-stat-row {
@@ -384,14 +319,13 @@ html[data-color-mode="auto"] .gitiu-avatar {
 .gitiu-profile-links > .gitiu-card-subtle {
   display: block;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 500;
   letter-spacing: 0;
 }
 
 html[data-color-mode="dark"] .gitiu-profile-links > .gitiu-card-subtle,
-html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
-  color: #93c5fd;
-  text-shadow: 0 0 16px rgba(96, 165, 250, 0.25);
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .gitiu-profile-links > .gitiu-card-subtle {
+  color: var(--gitiu-accent);
 }
 
 .gitiu-card-head {
@@ -404,6 +338,18 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
   font-size: 13px;
 }
 
+.gitiu-post-card > .gitiu-card-head > span {
+  color: var(--gitiu-ink);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.icon-row {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .gitiu-post-list {
   margin: 0;
   padding: 0;
@@ -411,8 +357,8 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
 
 .gitiu-post-item {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
   margin: 0 -8px;
   padding: 16px 8px;
   border-top: 1px solid var(--gitiu-line);
@@ -430,7 +376,9 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
   display: inline;
   margin: 0;
   color: var(--gitiu-ink);
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.5;
   letter-spacing: 0;
   background-image: linear-gradient(90deg, var(--gitiu-accent), transparent);
   background-position: 0 100%;
@@ -440,9 +388,13 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
 }
 
 .gitiu-post-item p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
   margin: 7px 0 0;
   color: var(--gitiu-muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .gitiu-soft-label {
@@ -477,7 +429,6 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
   color: #075985;
   background: #e0f2fe;
 }
-
 .gitiu-post-item:hover {
   background: var(--gitiu-post-hover);
   color: inherit;
@@ -490,12 +441,22 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
   background-size: 100% 2px;
 }
 
+
 .gitiu-post-meta {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 6px;
   flex-wrap: wrap;
+}
+
+.gitiu-post-meta .Label.gitiu-soft-label.gitiu-label-date {
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+  color: var(--gitiu-muted) !important;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
 }
 
 .gitiu-pagination {
@@ -516,7 +477,7 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
 .pagination span {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
+  min-height: 44px;
   border: 1px solid var(--gitiu-line);
   border-radius: 999px;
   background: var(--gitiu-button);
@@ -538,7 +499,6 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
   width: 14px;
   height: 14px;
 }
-
 .gitiu-more:hover,
 .gitiu-link-pill:hover,
 .pagination a:hover {
@@ -548,6 +508,7 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
   text-decoration: none;
   transform: translateY(-1px);
 }
+
 
 .gitiu-quote {
   margin: 18px 0 12px;
@@ -584,79 +545,18 @@ html[data-color-mode="auto"] .gitiu-profile-links > .gitiu-card-subtle {
 
 .gitiu-profile-links .gitiu-link-pill {
   justify-content: center;
-  min-height: 38px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.5);
+  min-height: 44px;
+  border-radius: 10px;
+  background: var(--gitiu-button);
+  font-weight: 500;
+}
+.gitiu-profile-links .gitiu-link-pill:hover {
+  border-color: var(--gitiu-accent);
+  background: var(--gitiu-post-hover);
+  color: var(--gitiu-accent);
+  box-shadow: none;
 }
 
-.gitiu-profile-links .gitiu-link-about:hover {
-  border-color: rgba(49, 130, 206, 0.32);
-  background: rgba(49, 130, 206, 0.045);
-  color: #2b6cb0;
-}
-
-.gitiu-profile-links .gitiu-link-link:hover {
-  border-color: rgba(47, 133, 90, 0.3);
-  background: rgba(47, 133, 90, 0.045);
-  color: #2f855a;
-}
-
-.gitiu-profile-links .gitiu-link-rss:hover {
-  border-color: rgba(221, 107, 32, 0.32);
-  background: rgba(221, 107, 32, 0.045);
-  color: #c05621;
-}
-
-.gitiu-profile-links .gitiu-link-post:hover {
-  border-color: rgba(128, 90, 213, 0.3);
-  background: rgba(128, 90, 213, 0.045);
-  color: #6b46c1;
-}
-
-html[data-color-mode="dark"] .gitiu-profile-links .gitiu-link-pill,
-html[data-color-mode="auto"] .gitiu-profile-links .gitiu-link-pill {
-  border-color: rgba(147, 197, 253, 0.18);
-  background: rgba(15, 23, 42, 0.42);
-  color: #dbeafe;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045), 0 0 18px rgba(59, 130, 246, 0.035);
-}
-
-html[data-color-mode="dark"] .gitiu-profile-links .gitiu-link-pill .octicon,
-html[data-color-mode="auto"] .gitiu-profile-links .gitiu-link-pill .octicon {
-  color: #93c5fd;
-}
-
-html[data-color-mode="dark"] .gitiu-profile-links .gitiu-link-about:hover,
-html[data-color-mode="auto"] .gitiu-profile-links .gitiu-link-about:hover {
-  border-color: rgba(56, 189, 248, 0.38);
-  background: rgba(56, 189, 248, 0.11);
-  color: #bae6fd;
-  box-shadow: 0 0 22px rgba(56, 189, 248, 0.12);
-}
-
-html[data-color-mode="dark"] .gitiu-profile-links .gitiu-link-link:hover,
-html[data-color-mode="auto"] .gitiu-profile-links .gitiu-link-link:hover {
-  border-color: rgba(45, 212, 191, 0.36);
-  background: rgba(45, 212, 191, 0.1);
-  color: #99f6e4;
-  box-shadow: 0 0 22px rgba(45, 212, 191, 0.11);
-}
-
-html[data-color-mode="dark"] .gitiu-profile-links .gitiu-link-rss:hover,
-html[data-color-mode="auto"] .gitiu-profile-links .gitiu-link-rss:hover {
-  border-color: rgba(251, 146, 60, 0.38);
-  background: rgba(251, 146, 60, 0.11);
-  color: #fed7aa;
-  box-shadow: 0 0 22px rgba(251, 146, 60, 0.11);
-}
-
-html[data-color-mode="dark"] .gitiu-profile-links .gitiu-link-post:hover,
-html[data-color-mode="auto"] .gitiu-profile-links .gitiu-link-post:hover {
-  border-color: rgba(168, 85, 247, 0.38);
-  background: rgba(168, 85, 247, 0.12);
-  color: #e9d5ff;
-  box-shadow: 0 0 22px rgba(168, 85, 247, 0.12);
-}
 
 #runday {
   display: none !important;
@@ -667,9 +567,10 @@ html[data-color-mode="auto"] .gitiu-profile-links .gitiu-link-post:hover {
   color: inherit;
   text-decoration: none;
 }
-
 .gitiu-quick-card,
-.gitiu-quick-card *,
+.gitiu-quick-card * {
+  text-decoration: none !important;
+}
 .gitiu-quick-card:hover,
 .gitiu-quick-card:hover * {
   text-decoration: none !important;
@@ -679,31 +580,28 @@ html[data-color-mode="auto"] .gitiu-profile-links .gitiu-link-post:hover {
   color: var(--gitiu-accent);
 }
 
-.gitiu-card,
+
 .gitiu-post-item,
 .gitiu-talk-item,
 .gitiu-link-pill {
   transition: background 260ms ease, border-color 260ms ease, box-shadow 260ms ease, transform 180ms ease;
 }
-
 .gitiu-card:hover {
-  transform: translateY(-2px);
+  transform: none;
 }
 
-html:not([data-color-mode="dark"]):not([data-color-mode="auto"]) .gitiu-card:hover {
-  box-shadow: 0 12px 30px rgba(133, 120, 100, 0.08), 0 2px 8px rgba(133, 120, 100, 0.04);
-}
+
 
 html[data-color-mode="dark"] .gitiu-soft-label,
-html[data-color-mode="auto"] .gitiu-soft-label {
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .gitiu-soft-label {
   border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #dbeafe !important;
+  color: var(--gitiu-ink) !important;
   background: rgba(255, 255, 255, 0.08) !important;
 }
 
 html[data-color-mode="dark"] .gitiu-quote,
-html[data-color-mode="auto"] .gitiu-quote {
-  color: #dbeafe;
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .gitiu-quote {
+  color: var(--gitiu-ink);
 }
 
 .postTitle,
@@ -747,13 +645,13 @@ html[data-color-mode="auto"] .gitiu-quote {
   font-weight: 700;
   transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
-
 .gitiu-post-page #cmButton:hover {
   border-color: var(--gitiu-accent);
   background: var(--gitiu-accent);
   color: var(--gitiu-accent-ink);
   transform: translateY(-1px);
 }
+
 
 .gitiu-post-page .comments:empty,
 .gitiu-post-page .comments:not(:has(.utterances-frame)) {
@@ -794,122 +692,6 @@ html[data-color-mode="auto"] .gitiu-quote {
 #postBody.markdown-body blockquote {
   border-left-color: var(--gitiu-accent);
   color: var(--gitiu-ink);
-}
-
-.gitiu-link-page #postBody.markdown-body blockquote {
-  margin-bottom: 24px;
-  padding: 16px 20px;
-  border-left: 4px solid #b88a4d;
-  border-radius: 0 8px 8px 0;
-  background: rgba(184, 138, 77, 0.06);
-}
-
-.friend-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 14px;
-  margin: 18px 0 30px;
-}
-
-.friend-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-  padding: 14px 15px;
-  border: 1px solid var(--gitiu-line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.62);
-  color: inherit;
-  text-decoration: none !important;
-  box-shadow: 0 2px 8px rgba(31, 35, 40, 0.02);
-  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-}
-
-.friend-card:hover {
-  border-color: rgba(184, 138, 77, 0.32);
-  background: rgba(255, 255, 255, 0.84);
-  box-shadow: 0 10px 24px rgba(133, 120, 100, 0.07), 0 2px 6px rgba(133, 120, 100, 0.03);
-  color: inherit;
-  text-decoration: none !important;
-  transform: translateY(-2px);
-}
-
-.friend-avatar {
-  display: block;
-  width: 46px;
-  height: 46px;
-  flex: 0 0 auto;
-  max-height: none !important;
-  margin: 0 !important;
-  border: 1px solid var(--gitiu-line);
-  border-radius: 999px !important;
-  background: #fff;
-  object-fit: cover;
-}
-
-.friend-info {
-  display: block;
-  min-width: 0;
-}
-
-.friend-name,
-.friend-desc {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.friend-name {
-  color: var(--gitiu-ink);
-  font-size: 14px;
-  font-weight: 750;
-}
-
-.friend-desc {
-  margin-top: 4px;
-  color: var(--gitiu-muted);
-  font-size: 12px;
-}
-
-.apply-rules-box {
-  margin-top: 22px;
-  padding: 22px;
-  border: 1px solid var(--gitiu-line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.apply-rules-box h3:first-child {
-  margin-top: 0;
-}
-
-html[data-color-mode="dark"] .gitiu-link-page #postBody.markdown-body blockquote,
-html[data-color-mode="auto"] .gitiu-link-page #postBody.markdown-body blockquote {
-  border-left-color: #c4b5fd;
-  background: rgba(196, 181, 253, 0.075);
-}
-
-html[data-color-mode="dark"] .friend-card,
-html[data-color-mode="auto"] .friend-card,
-html[data-color-mode="dark"] .apply-rules-box,
-html[data-color-mode="auto"] .apply-rules-box {
-  background: rgba(15, 23, 42, 0.42);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-html[data-color-mode="dark"] .friend-card:hover,
-html[data-color-mode="auto"] .friend-card:hover {
-  border-color: rgba(196, 181, 253, 0.35);
-  background: rgba(30, 41, 59, 0.58);
-  box-shadow: 0 0 22px rgba(168, 85, 247, 0.11);
-}
-
-html[data-color-mode="dark"] .friend-avatar,
-html[data-color-mode="auto"] .friend-avatar {
-  background: rgba(15, 23, 42, 0.86);
 }
 
 #cmButton {
@@ -964,9 +746,8 @@ html[data-color-mode="auto"] .friend-avatar {
 }
 
 html[data-color-mode="dark"] .gitiu-title-hash,
-html[data-color-mode="auto"] .gitiu-title-hash {
-  color: #c4b5fd;
-  text-shadow: 0 0 18px rgba(196, 181, 253, 0.22);
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .gitiu-title-hash {
+  color: var(--gitiu-accent);
 }
 
 .gitiu-card-page .title-right {
@@ -1049,14 +830,19 @@ html[data-color-mode="auto"] .gitiu-title-hash {
   cursor: pointer;
   transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
-
-.gitiu-card-page #taglabel .Label:hover,
 .gitiu-card-page #taglabel .Label.gitiu-active-chip {
   background: #2f3542 !important;
   color: #fff !important;
   box-shadow: 0 8px 18px rgba(31, 35, 40, 0.12);
   transform: translateY(-1px);
 }
+.gitiu-card-page #taglabel .Label:hover {
+  background: #2f3542 !important;
+  color: #fff !important;
+  box-shadow: 0 8px 18px rgba(31, 35, 40, 0.12);
+  transform: translateY(-1px);
+}
+
 
 .gitiu-card-page #taglabel .Counter {
   margin-left: 4px;
@@ -1131,7 +917,6 @@ html[data-color-mode="auto"] .gitiu-title-hash {
 .SideNav-item:first-child {
   border-top: 0 !important;
 }
-
 .SideNav-item:hover {
   background: rgba(255, 255, 255, 0.82);
   box-shadow: 0 8px 18px rgba(133, 120, 100, 0.06), 0 2px 6px rgba(133, 120, 100, 0.03) !important;
@@ -1140,15 +925,16 @@ html[data-color-mode="auto"] .gitiu-title-hash {
   transform: translateX(4px);
 }
 
+
 html[data-color-mode="dark"] .SideNav-item,
-html[data-color-mode="auto"] .SideNav-item {
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .SideNav-item {
   background: rgba(255, 255, 255, 0.035);
 }
-
 html[data-color-mode="dark"] .SideNav-item:hover,
-html[data-color-mode="auto"] .SideNav-item:hover {
+html[data-color-mode="auto"][data-gitiu-system-dark="true"] .SideNav-item:hover {
   background: rgba(255, 255, 255, 0.075);
 }
+
 
 .SideNav-item > .d-flex {
   min-width: 0;
@@ -1203,17 +989,6 @@ html[data-color-mode="auto"] .SideNav-item:hover {
   padding: 0 48px 0 16px !important;
 }
 
-.gitiu-card-page .subnav-search button {
-  display: none !important;
-  width: 0 !important;
-  min-width: 0 !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-}
-
 .gitiu-card-page .subnav-search-icon {
   position: absolute !important;
   top: 50% !important;
@@ -1231,12 +1006,12 @@ html[data-color-mode="auto"] .SideNav-item:hover {
   transform: translateY(-50%);
   transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
-
 .gitiu-card-page .subnav-search-icon:hover {
   background: rgba(31, 35, 40, 0.075);
   color: var(--gitiu-accent);
   transform: translateY(-50%);
 }
+
 
 .gitiu-talk-page #header {
   display: none;
@@ -1250,163 +1025,53 @@ html[data-color-mode="auto"] .SideNav-item:hover {
   box-shadow: none;
 }
 
-.gitiu-talk-board {
-  padding: 6px 0 22px;
-}
+/* Brand artwork is vector based, with explicit light/dark assets. */
+.gitiu-brand-link { display: inline-flex; max-width: 100%; vertical-align: middle; }
+.gitiu-home .octicon { fill: currentColor; }
+.gitiu-brand-logo { display: block; width: 220px; height: auto; max-width: 100%; }
+.gitiu-brand-subtitle { display: block; width: 220px; max-width: 100%; margin-top: 7px; }
+.gitiu-slogan-art { display: block; width: 178px; max-width: 100%; height: auto; margin: 0 auto; pointer-events: none; }
 
-.gitiu-talk-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 0 4px 20px 34px;
-}
+/* A quiet timeline: years in the margin, dates aligned with each entry. */
+body.gitiu-talk-page { max-width: 1040px !important; }
+.gitiu-talk-board { padding: 0; }
+.gitiu-talk-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 0 32px; }
+.gitiu-talk-head .gitiu-card-subtle { font-size: 12px; }
+.gitiu-talk-head h1 { margin: 8px 0; font-size: 36px; font-weight: 600; line-height: 1.3; color: var(--gitiu-ink); }
+.gitiu-talk-title-dot { color: var(--gitiu-accent); }
+.gitiu-talk-head p { margin: 0; color: var(--gitiu-muted); font-size: 14px; }
+.gitiu-talk-year { display: grid; grid-template-columns: 94px minmax(0, 1fr); gap: 22px; margin-bottom: 26px; }
+.gitiu-talk-year:last-child { margin-bottom: 0; }
+.gitiu-year-heading { position: relative; margin: 0; padding-top: 16px; color: var(--gitiu-ink); font-size: 23px; font-weight: 550; font-variant-numeric: tabular-nums; }
+.gitiu-year-heading span { display: block; margin-top: 4px; color: var(--gitiu-muted); font-size: 11px; font-weight: 400; }
+.gitiu-year-heading::after { content: ''; position: absolute; top: 82px; bottom: 0; left: 21px; width: 1px; background: var(--gitiu-line); }
+.gitiu-talk-list { display: grid; min-width: 0; padding: 0 22px; border: 1px solid var(--gitiu-line); border-radius: var(--gitiu-radius); background: var(--gitiu-card); }
+.gitiu-talk-item { display: grid; grid-template-columns: 56px minmax(0, 1fr) 18px; align-items: start; gap: 18px; min-width: 0; padding: 22px 0; border-bottom: 1px solid var(--gitiu-line); color: var(--gitiu-ink); text-decoration: none; transition: color 180ms ease; }
+.gitiu-talk-item:last-child { border-bottom: 0; }
+.gitiu-talk-item:hover { color: var(--gitiu-ink); text-decoration: none; }
 
-.gitiu-talk-head h1 {
-  margin: 4px 0 0;
-  color: var(--gitiu-ink);
-  font-size: 34px;
-  line-height: 1.12;
-  letter-spacing: 0;
-}
+.gitiu-talk-item:hover h3,
+.gitiu-talk-item:hover .gitiu-talk-arrow { color: var(--gitiu-accent); }
 
-.gitiu-talk-list {
-  position: relative;
-  display: grid;
-  gap: 16px;
-  padding-left: 34px;
-}
-
-.gitiu-talk-list::before {
-  content: "";
-  position: absolute;
-  top: 18px;
-  bottom: 18px;
-  left: 10px;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, var(--gitiu-line) 12%, var(--gitiu-line) 88%, transparent);
-}
-
-.gitiu-talk-item {
-  position: relative;
-  display: block;
-  padding: 17px 18px;
-  border: 1px solid var(--gitiu-line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.68);
-  box-shadow: 0 8px 24px rgba(133, 120, 100, 0.05), 0 2px 6px rgba(133, 120, 100, 0.03);
-  color: inherit;
-  text-decoration: none;
-}
-
-.gitiu-talk-item::before {
-  content: "";
-  position: absolute;
-  left: -29px;
-  top: 24px;
-  width: 9px;
-  height: 9px;
-  border: 2px solid var(--gitiu-card);
-  border-radius: 999px;
-  background: var(--gitiu-accent);
-  box-shadow: 0 0 0 1px var(--gitiu-line);
-}
-
-.gitiu-talk-item::after {
-  content: "";
-  position: absolute;
-  left: -8px;
-  top: 22px;
-  width: 14px;
-  height: 14px;
-  border-left: 1px solid var(--gitiu-line);
-  border-bottom: 1px solid var(--gitiu-line);
-  background: inherit;
-  transform: rotate(45deg);
-}
-
-.gitiu-talk-item:hover {
-  border-color: var(--gitiu-line);
-  background: rgba(255, 255, 255, 0.84);
-  box-shadow: 0 12px 30px rgba(133, 120, 100, 0.08), 0 2px 8px rgba(133, 120, 100, 0.04);
-  color: inherit;
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-
-.gitiu-talk-body {
-  position: relative;
-  z-index: 1;
-}
-
-.gitiu-talk-meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-html[data-color-mode="dark"] .gitiu-talk-item,
-html[data-color-mode="auto"] .gitiu-talk-item {
-  background: rgba(20, 24, 33, 0.68);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
-}
-
-html[data-color-mode="dark"] .gitiu-talk-item:hover,
-html[data-color-mode="auto"] .gitiu-talk-item:hover {
-  background: rgba(26, 31, 43, 0.76);
-  box-shadow: 0 0 24px rgba(99, 102, 241, 0.11);
-}
-
-html[data-color-mode="dark"] .gitiu-talk-list::before,
-html[data-color-mode="auto"] .gitiu-talk-list::before {
-  background: linear-gradient(180deg, transparent, rgba(96, 165, 250, 0.26) 12%, rgba(168, 85, 247, 0.4) 54%, rgba(45, 212, 191, 0.24) 88%, transparent);
-  box-shadow: 0 0 18px rgba(99, 102, 241, 0.22);
-}
-
-html[data-color-mode="dark"] .gitiu-talk-item::before,
-html[data-color-mode="auto"] .gitiu-talk-item::before {
-  border-color: rgba(20, 24, 33, 0.94);
-  background: #8b5cf6;
-  box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.42), 0 0 16px rgba(139, 92, 246, 0.58);
-  animation: gitiu-talk-pulse 2.8s ease-in-out infinite;
-}
-
-.gitiu-talk-item time {
-  color: var(--gitiu-muted);
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.5;
-  white-space: nowrap;
-}
-
-.gitiu-talk-item h2 {
-  margin: 0;
-  color: var(--gitiu-ink);
-  font-size: 19px;
-  line-height: 1.35;
-  letter-spacing: 0;
-}
-
-.gitiu-talk-item p {
-  margin: 7px 0 0;
-  color: var(--gitiu-muted);
-  font-size: 14px;
-}
-
-@keyframes gitiu-talk-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.76;
-  }
-
-  50% {
-    transform: scale(1.16);
-    opacity: 1;
-  }
+.gitiu-talk-item .gitiu-talk-date { padding-top: 4px; color: var(--gitiu-muted); font: 12px/1.7 Consolas, monospace; white-space: nowrap; }
+.gitiu-talk-body { min-width: 0; }
+.gitiu-talk-item h3 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.6; color: var(--gitiu-ink); transition: color 180ms ease; }
+.gitiu-talk-item p { margin: 7px 0 0; font-size: 14px; line-height: 1.85; color: var(--gitiu-muted); }
+.gitiu-talk-arrow { color: var(--gitiu-muted); padding-top: 3px; font-size: 15px; }
+@media (max-width: 600px) {
+  .gitiu-talk-head { padding-bottom: 22px; gap: 14px; }
+  .gitiu-talk-head h1 { font-size: 30px; }
+  .gitiu-talk-head p { font-size: 12px; }
+  .gitiu-talk-head .gitiu-card-subtle { font-size: 11px; }
+  .gitiu-talk-year { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 22px; }
+  .gitiu-year-heading { display: flex; align-items: baseline; gap: 12px; padding-top: 0; font-size: 21px; }
+  .gitiu-year-heading span { margin: 0; }
+  .gitiu-year-heading::after { display: none; }
+  .gitiu-talk-list { padding: 0 14px; }
+  .gitiu-talk-item { grid-template-columns: 42px minmax(0, 1fr) 12px; gap: 10px; padding: 16px 0; }
+  .gitiu-talk-item h3 { font-size: 16px; line-height: 1.5; }
+  .gitiu-talk-item p { font-size: 13px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+  .gitiu-talk-item .gitiu-talk-date { font-size: 11px; }
 }
 
 .postToc,
@@ -1435,14 +1100,18 @@ html[data-color-mode="auto"] .gitiu-talk-item::before {
   display: none !important;
 }
 
+body:has(.toc:empty) .toc-icon {
+  display: none !important;
+}
+
 .toc a {
   color: var(--gitiu-muted);
   text-decoration: none;
 }
-
 .toc a:hover {
   color: var(--gitiu-accent);
 }
+
 
 #articletoc,
 .articletoc,
@@ -1469,7 +1138,6 @@ button[title="目录"] {
   box-shadow: var(--gitiu-shadow) !important;
   transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
-
 #articletoc:hover,
 .articletoc:hover,
 .toc-icon:hover,
@@ -1490,6 +1158,7 @@ button[title="目录"]:hover {
   transform: translateY(-1px);
 }
 
+
 body > div[style*="position: fixed"] {
   border-color: var(--gitiu-line) !important;
   background: var(--gitiu-button) !important;
@@ -1497,13 +1166,7 @@ body > div[style*="position: fixed"] {
   box-shadow: var(--gitiu-shadow) !important;
 }
 
-@media (max-width: 760px) {
-  html,
-  body {
-    max-width: 100vw;
-    overflow-x: clip;
-  }
-
+@media (max-width: 860px) {
   body {
     padding: 14px 14px calc(22px + env(safe-area-inset-bottom)) !important;
     font-size: 15px;
@@ -1521,6 +1184,7 @@ body > div[style*="position: fixed"] {
   .gitiu-bento-grid {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 12px;
   }
 
@@ -1533,10 +1197,10 @@ body > div[style*="position: fixed"] {
     background: var(--gitiu-card);
     box-shadow: var(--gitiu-shadow);
   }
-
-  .gitiu-card:hover {
+.gitiu-card:hover {
     transform: none;
   }
+
 
   .gitiu-profile-card {
     order: 1;
@@ -1552,12 +1216,9 @@ body > div[style*="position: fixed"] {
     min-height: 0;
   }
 
-  #footer {
-    margin-top: 14px;
-    padding: 12px 8px;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+  body > #footer {
+    margin-top: 20px;
+    padding: 16px 0 0;
     line-height: 1.65;
   }
 
@@ -1571,11 +1232,11 @@ body > div[style*="position: fixed"] {
     border-radius: 0;
     background: transparent;
   }
-
-  .gitiu-post-item:hover {
+.gitiu-post-item:hover {
     background: transparent;
     box-shadow: none;
   }
+
 
   .gitiu-post-item h2 {
     font-size: 17px;
@@ -1583,7 +1244,7 @@ body > div[style*="position: fixed"] {
   }
 
   .gitiu-post-item p {
-    display: none;
+    display: block;
   }
 
   .gitiu-post-meta {
@@ -1604,7 +1265,7 @@ body > div[style*="position: fixed"] {
   }
 
   .gitiu-more {
-    min-height: 36px;
+    min-height: 44px;
     margin-top: 0;
     padding: 0 11px;
     white-space: nowrap;
@@ -1677,8 +1338,8 @@ body > div[style*="position: fixed"] {
   .title-right .circle,
   .title-right .btn,
   .gitiu-icon-button {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
   }
 
   #postBody {
@@ -1780,22 +1441,350 @@ body > div[style*="position: fixed"] {
   }
 }
 
-body.gitiu-tag-page .subnav-search > button.btn,
-body.gitiu-tag-page .subnav-search > button[type="submit"] {
-  display: none !important;
-  visibility: hidden !important;
-  width: 0 !important;
-  min-width: 0 !important;
-  max-width: 0 !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
+/* Content owns page height. Do not reintroduce viewport-height fillers here. */
+body.gitiu-post-page {
+  max-width: 960px !important;
+}
+
+body.gitiu-link-page {
+  max-width: 1160px !important;
+}
+
+.gitiu-card-page #header,
+.gitiu-card-page #content,
+.gitiu-talk-page #content {
+  max-width: none;
+}
+
+.gitiu-profile-top > div,
+.gitiu-post-item > div,
+.gitiu-talk-meta > *,
+.subnav-search {
+  min-width: 0;
+}
+
+.gitiu-profile-card h1,
+.gitiu-post-item,
+.gitiu-talk-item,
+.gitiu-card-page .tagTitle,
+#postBody,
+#footer {
+  overflow-wrap: anywhere;
+}
+
+.gitiu-post-page #header {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.gitiu-post-page .postTitle {
+  flex: 1 1 240px;
+  min-width: 0;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.35;
+}
+
+.gitiu-post-page .title-right {
+  flex-shrink: 0;
+}
+
+.gitiu-post-page .title-right .circle,
+.gitiu-post-page .title-right .btn,
+.gitiu-card-page .title-right .circle,
+.gitiu-card-page .title-right .btn {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+
+#postBody.markdown-body img.friend-avatar {
+  width: 46px;
+  height: 46px;
+}
+
+#postBody video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#postBody iframe {
+  max-width: 100%;
+}
+
+#postBody markdown-accessiblity-table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.gitiu-talk-head .gitiu-link-pill {
+  flex-shrink: 0;
+}
+
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--gitiu-accent);
+  outline-offset: 4px;
+}
+
+@media (min-width: 521px) and (max-width: 860px) {
+  body {
+    padding: 28px !important;
+  }
+
+  .gitiu-card {
+    padding: 24px;
+  }
+
+  .gitiu-profile-links .gitiu-links {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .gitiu-profile-links {
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .gitiu-profile-links > .gitiu-card-subtle {
+    display: none;
+  }
+
+  .gitiu-profile-links .gitiu-links {
+    margin-top: 0;
+    gap: 8px;
+  }
+
+  .gitiu-profile-links .gitiu-link-pill {
+    min-height: 44px;
+  }
+
+  .gitiu-stat-row {
+    margin-top: 16px;
+  }
+
+  .gitiu-post-card > .gitiu-card-head > span {
+    font-size: 18px;
+  }
+
+  .gitiu-post-page .postTitle {
+    flex-basis: 150px;
+  }
+
+  .listTitle {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .gitiu-card-page #taglabel {
+    gap: 8px;
+  }
+
+  .gitiu-card-page #taglabel .Label {
+    min-height: 44px;
+    padding-inline: 12px !important;
+  }
+
+  .apply-rules-box {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 860px) {
+  .gitiu-brand-logo { width: 184px; }
+  .gitiu-brand-subtitle { width: 184px; margin-top: 5px; }
+  .gitiu-slogan-art { width: 160px; }
+}
+
+/* Single-column home: compact identity, one featured excerpt, then headlines.
+   Keep all four articles and every navigation link without an inner scroller. */
+@media (max-width: 860px) {
+  .gitiu-home #content .gitiu-profile-card {
+    padding: 4px 2px 6px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .gitiu-home .gitiu-profile-top {
+    gap: 12px;
+  }
+
+  .gitiu-home .gitiu-profile-top .Label {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 0;
+    border: 0;
+    background: transparent !important;
+    color: var(--gitiu-muted) !important;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .gitiu-home .gitiu-profile-card > p {
+    display: none;
+  }
+
+  .gitiu-home .gitiu-stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 12px;
+  }
+
+  .gitiu-home .gitiu-stat {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+
+  .gitiu-home .gitiu-stat::before {
+    display: none;
+  }
+
+  .gitiu-home .gitiu-stat strong {
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.5;
+  }
+
+  .gitiu-home .gitiu-stat span {
+    font-size: 12px;
+  }
+
+  .gitiu-home .gitiu-profile-links {
+    margin-top: 12px;
+    padding-top: 0;
+    border: 0;
+  }
+
+  .gitiu-home .gitiu-profile-links > .gitiu-card-subtle {
+    display: none;
+  }
+
+  .gitiu-home .gitiu-profile-links .gitiu-links {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 0;
+  }
+
+  .gitiu-home .gitiu-profile-links .gitiu-link-pill {
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 6px;
+    gap: 4px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .gitiu-home .gitiu-post-card {
+    padding: 14px 16px;
+  }
+
+  .gitiu-home .gitiu-post-card > .gitiu-card-head {
+    margin-bottom: 4px;
+  }
+
+  .gitiu-home .gitiu-post-item {
+    min-height: 0;
+    padding: 12px 4px;
+    gap: 5px;
+  }
+
+  .gitiu-home .gitiu-post-item h2 {
+    display: block;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .gitiu-home .gitiu-post-item p {
+    display: none;
+  }
+
+  .gitiu-home .gitiu-post-item:first-child {
+    padding-top: 10px;
+    padding-bottom: 16px;
+  }
+
+  .gitiu-home .gitiu-post-item:first-child h2 {
+    font-size: 19px;
+    font-weight: 650;
+  }
+
+  .gitiu-home .gitiu-post-item:first-child p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .gitiu-home .gitiu-post-meta .gitiu-label-article {
+    display: none;
+  }
+
+  .gitiu-home .gitiu-pagination {
+    margin-top: 0;
+    padding-top: 8px;
+  }
+
+  .gitiu-home .gitiu-pagination > span {
+    display: block;
+    margin-right: auto;
+    font-size: 12px;
+  }
+
+  .gitiu-home .gitiu-quick-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .gitiu-home .gitiu-quick-card .gitiu-card-head {
+    grid-column: 1;
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .gitiu-home .gitiu-quick-card .Label {
+    display: none;
+  }
+
+  .gitiu-home .gitiu-quote {
+    grid-column: 1;
+    margin: 4px 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  .gitiu-home .gitiu-quote-more {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .gitiu-home > #footer {
+    margin-top: 16px;
+    padding-top: 12px;
+    font-size: 11px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1806,4 +1795,285 @@ body.gitiu-tag-page .subnav-search > button[type="submit"] {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+/* Archive: a quiet chronological index with a real search form. */
+body.gitiu-tag-page { max-width: 1040px !important; }
+body.gitiu-tag-page #header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; padding: 0 0 28px; margin: 0; border: 0; background: transparent; box-shadow: none; }
+body.gitiu-tag-page .tagTitle { display: block !important; margin: 0; grid-column: 1; font-size: clamp(26px, 4vw, 34px); line-height: 1.4; font-weight: 650; white-space: normal; }
+.gitiu-archive-intro { grid-column: 1; margin: 0; font-size: 13px; line-height: 1.8; color: var(--gitiu-muted); }
+body.gitiu-tag-page .title-right { grid-column: 2; grid-row: 1 / span 2; align-self: start; margin: 0; gap: 8px; width: auto; flex-wrap: nowrap; }
+body.gitiu-tag-page .title-right .circle { margin: 0; }
+body.gitiu-tag-page #content { padding: 0 !important; border: 0 !important; background: transparent !important; box-shadow: none !important; }
+.gitiu-tag-page .octicon { fill: currentColor; }
+.gitiu-archive-search { display: flex; align-items: stretch; gap: 8px; padding: 6px; margin-bottom: 18px; border: 1px solid var(--gitiu-line); border-radius: 12px; background: var(--gitiu-card); }
+body.gitiu-tag-page .gitiu-archive-search input { flex: 1; min-width: 0; width: 0 !important; height: 44px !important; padding: 0 12px !important; border: 0 !important; border-radius: 6px !important; background: transparent !important; box-shadow: none; color: var(--gitiu-ink); font: inherit; font-size: 14px; }
+.gitiu-search-submit { display: block; flex: 0 0 76px; min-height: 44px; border: 0; border-radius: 8px; background: var(--gitiu-ink); color: var(--gitiu-card); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.gitiu-search-submit:hover { background: var(--gitiu-accent); }
+
+.gitiu-archive-search:focus-within { border-color: var(--gitiu-accent); }
+.gitiu-search-submit:focus-visible, .gitiu-tag-page #taglabel button:focus-visible { outline: 2px solid var(--gitiu-accent); outline-offset: 3px; }
+body.gitiu-tag-page #taglabel { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0 !important; border: 0; background: transparent; box-shadow: none; }
+body.gitiu-tag-page #taglabel .Label { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; margin: 0; padding: 8px 12px !important; border: 1px solid transparent !important; border-radius: 8px; background: transparent !important; color: var(--gitiu-muted) !important; font-size: 13px; font-weight: 400; cursor: pointer; transform: none; box-shadow: none; }
+body.gitiu-tag-page #taglabel .Label.gitiu-active-chip { background: var(--gitiu-card) !important; border-color: var(--gitiu-line) !important; color: var(--gitiu-ink) !important; }
+body.gitiu-tag-page #taglabel .Label:hover { background: var(--gitiu-card) !important; border-color: var(--gitiu-line) !important; color: var(--gitiu-ink) !important; }
+
+body.gitiu-tag-page #taglabel .Counter { padding: 0; margin: 0; background: transparent; color: var(--gitiu-muted); font-size: 11px; }
+.gitiu-archive-status { margin: 16px 0 0; font-size: 12px; color: var(--gitiu-muted); overflow-wrap: anywhere; }
+body.gitiu-tag-page .SideNav { display: block; padding: 0; }
+.gitiu-archive-year { display: flex; align-items: baseline; gap: 12px; margin: 28px 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--gitiu-line); font-size: 23px; font-weight: 600; line-height: 1.4; color: var(--gitiu-ink); }
+.gitiu-archive-year[hidden] { display: none; }
+.gitiu-archive-year span { font-size: 11px; font-weight: 400; color: var(--gitiu-muted); }
+body.gitiu-tag-page .lists { margin: 0; }
+body.gitiu-tag-page .SideNav-item { display: grid !important; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 16px; min-height: 58px; margin: 0; padding: 14px 10px; border-radius: 6px; background: transparent; box-shadow: none !important; transform: none; }
+body.gitiu-tag-page .SideNav-item:hover { background: var(--gitiu-card); }
+
+body.gitiu-tag-page .SideNav-item > .d-flex { grid-column: 2; grid-row: 1; }
+body.gitiu-tag-page .listTitle { font-size: 16px; font-weight: 500; line-height: 1.6; white-space: normal; overflow-wrap: anywhere; }
+body.gitiu-tag-page .listLabels { grid-column: 3; grid-row: 1; gap: 6px; }
+body.gitiu-tag-page .SideNav .LabelName { padding: 0 !important; border: 0 !important; background: transparent !important; color: var(--gitiu-muted) !important; font-size: 11px; font-weight: 400; }
+body.gitiu-tag-page .LabelTime { display: none !important; }
+.gitiu-archive-date { grid-column: 1; grid-row: 1; align-self: baseline; padding-top: 3px; color: var(--gitiu-muted); font: 12px/1.8 Consolas, monospace; }
+body.gitiu-tag-page .notFind { margin: 24px 0 !important; padding: 32px 16px; border: 1px dashed var(--gitiu-line); border-radius: 12px; font-size: 14px !important; line-height: 1.8; text-align: center; color: var(--gitiu-muted); }
+@media (max-width: 600px) {
+  body.gitiu-tag-page #header { padding-bottom: 20px; gap: 6px 10px; }
+  body.gitiu-tag-page .SideNav-item { grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; row-gap: 3px; padding: 12px 4px; }
+  body.gitiu-tag-page .listLabels { grid-column: 2; grid-row: 2; justify-content: flex-start; }
+  body.gitiu-tag-page .listTitle { font-size: 15px; }
+  body.gitiu-tag-page #taglabel .Label { min-height: 44px; padding: 8px 10px !important; }
+  .gitiu-archive-year { margin-top: 24px; font-size: 21px; }
+}
+body.gitiu-tag-page #taglabel .Label.gitiu-active-chip { box-shadow: none !important; }
+body.gitiu-tag-page .SideNav .Label.LabelName[style] { background: transparent !important; color: var(--gitiu-muted) !important; }
+/* Friends: compact site cards and a local, vector fallback emblem. */
+body.gitiu-link-page { max-width: 1100px !important; }
+body.gitiu-link-page #header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; padding: 0 0 30px; margin: 0; border: 0; box-shadow: none; background: transparent; }
+body.gitiu-link-page .postTitle { margin: 0; font-size: 34px; font-weight: 650; }
+.gitiu-friends-intro { grid-column: 1; margin: 0; color: var(--gitiu-muted); font-size: 13px; line-height: 1.8; }
+body.gitiu-link-page .title-right { grid-column: 2; grid-row: 1 / span 2; align-self: start; margin: 0; gap: 8px; }
+body.gitiu-link-page .title-right .circle { margin: 0; }
+.gitiu-link-page .octicon { fill: currentColor; }
+body.gitiu-link-page #content, body.gitiu-link-page #postBody { padding: 0 !important; border: 0 !important; background: transparent !important; box-shadow: none !important; }
+.gitiu-link-page .gitiu-friends-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.gitiu-link-page #postBody .gitiu-friends-heading h2 { margin: 0; padding: 0; border: 0; font-size: 17px; font-weight: 600; }
+.gitiu-friends-heading > span { color: var(--gitiu-muted); font-size: 11px; }
+.gitiu-link-page .friend-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.gitiu-link-page .friend-card { display: grid; grid-template-columns: 56px minmax(0, 1fr) 12px; gap: 12px; align-items: start; min-width: 0; padding: 20px 16px; border: 1px solid var(--gitiu-line); border-radius: 14px; background: var(--gitiu-card); color: var(--gitiu-ink); text-decoration: none !important; transition: border-color .18s ease, transform .18s ease; }
+.gitiu-link-page .friend-card:hover { border-color: var(--gitiu-accent); transform: translateY(-2px); }
+
+.friend-card:focus-visible, .friend-copy:focus-visible, .friend-application summary:focus-visible { outline: 2px solid var(--gitiu-accent); outline-offset: 4px; }
+.friend-emblem { position: relative; display: block; width: 56px; height: 56px; border-radius: 14px; color: #8b6748; background: #f3ebdf; }
+.friend-emblem > svg { display: block; width: 56px; height: 56px; }
+.friend-tone-1 { color: #65775b; background: #eaf0e4; }
+.friend-tone-2 { color: #887387; background: #f0e9ef; }
+.friend-tone-3 { color: #5e7b80; background: #e8efed; }
+.friend-initial { position: absolute; right: -2px; bottom: -3px; display: grid; place-items: center; width: 20px; height: 20px; border: 2px solid var(--gitiu-card); border-radius: 50%; background: var(--gitiu-card); font: 600 10px/1 sans-serif; }
+body.gitiu-link-page #postBody .friend-site-icon { position: absolute; inset: 8px; display: none; width: 40px; height: 40px; max-height: none; margin: 0 !important; padding: 0; border: 0; border-radius: 8px; object-fit: contain; background: transparent; box-shadow: none; }
+.friend-emblem.has-site-icon > svg, .friend-emblem.has-site-icon .friend-initial { visibility: hidden; }
+body.gitiu-link-page #postBody .has-site-icon .friend-site-icon { display: block; }
+.friend-info { display: block; min-width: 0; }
+.friend-name { display: block; font-size: 15px; font-weight: 600; line-height: 1.6; overflow-wrap: anywhere; }
+.friend-desc { display: block; margin-top: 4px; font-size: 12px; color: var(--gitiu-muted); line-height: 1.7; overflow-wrap: anywhere; }
+.friend-domain { display: block; margin-top: 10px; font: 10px/1.6 Consolas, monospace; color: var(--gitiu-muted); overflow-wrap: anywhere; }
+.friend-arrow { padding-top: 3px; color: var(--gitiu-muted); font-size: 13px; }
+.gitiu-link-page .friend-own { display: flex; gap: 20px; align-items: center; margin-top: 32px; padding: 24px; border: 1px solid var(--gitiu-line); border-radius: 14px; }
+.friend-own-mark { flex: 0 0 64px; color: var(--gitiu-accent); }
+.friend-own-mark svg { display: block; width: 64px; height: 64px; }
+.friend-own-info { min-width: 0; }
+.friend-eyebrow { font-size: 11px; color: var(--gitiu-muted); }
+.gitiu-link-page #postBody .friend-own h2 { margin: 4px 0; padding: 0; border: 0; font-size: 20px; font-weight: 600; }
+.gitiu-link-page #postBody .friend-own p { display: inline; margin: 0; font-size: 12px; color: var(--gitiu-muted); }
+.friend-own-info > a { display: inline-block; margin-left: 12px; font: 11px/1.8 Consolas, monospace; color: var(--gitiu-muted); }
+.friend-own-actions { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0; }
+.friend-copy { min-height: 44px; padding: 0 16px; border: 1px solid var(--gitiu-line); border-radius: 9px; background: var(--gitiu-card); color: var(--gitiu-ink); font: inherit; font-size: 12px; cursor: pointer; }
+.friend-copy:hover { border-color: var(--gitiu-accent); }
+
+.friend-copy-feedback { font-size: 11px; color: var(--gitiu-muted); }
+.friend-copy-feedback:empty { display: none; }
+.friend-application { margin-top: 18px; border-bottom: 1px solid var(--gitiu-line); }
+.friend-application summary { padding: 18px 0; cursor: pointer; color: var(--gitiu-ink); font-size: 14px; font-weight: 500; }
+.friend-application summary span { margin-left: 12px; color: var(--gitiu-muted); font-size: 11px; font-weight: 400; }
+.friend-rules { padding: 8px 0 20px; font-size: 13px; color: var(--gitiu-muted); }
+.gitiu-link-page #postBody .friend-rules pre { background: var(--gitiu-card); padding: 16px; font-size: 12px; }
+body.gitiu-link-page #cmButton { width: auto; min-height: 44px; margin-top: 18px; padding: 0 18px; font-size: 12px; border: 1px solid var(--gitiu-line); box-shadow: none; }
+body.gitiu-link-page #comments:empty { display: none; }
+@media (max-width: 980px) { .gitiu-link-page .friend-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  body.gitiu-link-page .postTitle { font-size: 28px; }
+  body.gitiu-link-page #header { padding-bottom: 24px; }
+  .gitiu-link-page .friend-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .gitiu-link-page .friend-card { padding: 16px; align-items: center; }
+  .friend-domain { margin-top: 5px; }
+  .gitiu-link-page .friend-own { display: grid; grid-template-columns: 48px minmax(0, 1fr); padding: 18px 16px; gap: 14px; margin-top: 24px; }
+  .friend-own-mark svg { width: 48px; height: 48px; }
+  .friend-own-info > a { display: block; margin-left: 0; }
+  .friend-own-actions { grid-column: 1 / -1; margin: 0; align-items: stretch; }
+  .friend-copy { width: 100%; }
+}
+body.gitiu-link-page .toc, body.gitiu-link-page .toc-icon { display: none !important; }
+.friend-initial { color: var(--gitiu-ink); }
+/* Site icons belong to the outgoing link, not the article image lightbox. */
+.friend-emblem { pointer-events: none; }
+/* Shared controls. Roles share geometry; emphasis follows the action. */
+:root { --gitiu-control-radius: 11px; --gitiu-control-border: rgba(83, 70, 53, .16); --gitiu-control-soft: #f1e8dd; --gitiu-control-ring: rgba(139, 101, 69, .24); }
+html[data-color-mode="dark"], html[data-color-mode="auto"][data-gitiu-system-dark="true"] { --gitiu-control-border: rgba(170, 187, 208, .22); --gitiu-control-soft: #303742; --gitiu-control-ring: rgba(170, 187, 208, .26); }
+:is(body, #header, #content) .gitiu-control {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 7px;
+  min-height: 44px !important; padding: 0 15px !important; border: 1px solid var(--gitiu-control-border) !important;
+  border-radius: var(--gitiu-control-radius) !important; background: var(--gitiu-card) !important; color: var(--gitiu-ink) !important;
+  font-family: inherit; font-size: 13px !important; font-weight: 500 !important; line-height: 1.35 !important;
+  text-decoration: none !important; text-shadow: none !important; box-shadow: none !important;
+  cursor: pointer; opacity: 1; vertical-align: middle; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease !important;
+  transform: none !important;
+}
+:is(body, #header, #content) .gitiu-control svg { flex: 0 0 auto; width: 17px; height: 17px; margin: 0 !important; color: inherit !important; pointer-events: none; }
+:is(body, #header, #content) .gitiu-control svg:not(.d-none) { display: block; }
+:is(body, #header, #content) .gitiu-control .octicon { fill: currentColor; }
+:is(body, #header, #content) .gitiu-control[data-gitiu-control="icon"] { width: 44px !important; min-width: 44px !important; height: 44px !important; padding: 0 !important; }
+:is(body, #header, #content) .gitiu-control[data-gitiu-control="primary"] { background: var(--gitiu-accent) !important; border-color: var(--gitiu-accent) !important; color: var(--gitiu-accent-ink) !important; font-weight: 600 !important; }
+:is(body, #header, #content) .gitiu-control[data-gitiu-control="filter"] { background: transparent !important; border-color: transparent !important; color: var(--gitiu-muted) !important; padding-inline: 12px !important; }
+:is(body, #header, #content) .gitiu-control[data-gitiu-control="filter"][aria-pressed="true"] { background: var(--gitiu-control-soft) !important; border-color: var(--gitiu-control-border) !important; color: var(--gitiu-accent) !important; font-weight: 600 !important; }
+:is(body, #header, #content) .gitiu-control .Counter { display: inline-grid; place-items: center; min-width: 17px; margin: 0 !important; padding: 0 !important; color: inherit !important; background: transparent !important; font-size: 10px; font-weight: 400; }
+@media (hover: hover) {
+:is(body, #header, #content) .gitiu-control:hover { background: var(--gitiu-control-soft) !important; border-color: var(--gitiu-accent) !important; color: var(--gitiu-accent) !important; transform: none !important; }
+
+:is(body, #header, #content) .gitiu-control[data-gitiu-control="primary"]:hover { background: var(--gitiu-ink) !important; border-color: var(--gitiu-ink) !important; color: var(--gitiu-card) !important; }
+
+}
+:is(body, #header, #content) .gitiu-control:focus-visible { outline: 2px solid var(--gitiu-accent) !important; outline-offset: 3px; box-shadow: 0 0 0 5px var(--gitiu-control-ring) !important; }
+:is(body, #header, #content) .gitiu-control:active { box-shadow: inset 0 1px 3px var(--gitiu-control-ring) !important; }
+:is(body, #header, #content) .gitiu-control:is(:disabled, [aria-disabled="true"]) { opacity: .5; cursor: not-allowed; box-shadow: none !important; }
+:is(body, #header, #content) .gitiu-search-submit { flex: 0 0 auto; min-width: 90px; }
+:is(body, #header, #content) .gitiu-more { padding-right: 11px !important; }
+:is(body, #header, #content) .gitiu-more .gitiu-ui-glyph { width: 14px; }
+:is(body, #header, #content) .toc-icon { bottom: calc(20px + env(safe-area-inset-bottom)); right: 20px; background: var(--gitiu-card) !important; box-shadow: 0 4px 16px var(--gitiu-control-ring) !important; z-index: 1001; }
+:is(body, #header, #content) .toc-icon[aria-expanded="true"] { background: var(--gitiu-control-soft) !important; border-color: var(--gitiu-accent) !important; color: var(--gitiu-accent) !important; }
+body .toc { bottom: calc(76px + env(safe-area-inset-bottom)) !important; }
+:is(body, #header, #content) clipboard-copy { margin: 6px !important; }
+.copy-feedback { background: var(--gitiu-ink) !important; color: var(--gitiu-card) !important; border-radius: 6px; font-size: 11px; line-height: 1.5; padding: 5px 8px; right: 58px; }
+body .lb-lightbox-overlay .gitiu-control { background: var(--gitiu-card) !important; border-color: var(--gitiu-control-border) !important; color: var(--gitiu-ink) !important; box-shadow: 0 2px 12px rgba(0,0,0,.15) !important; }
+:is(body, #header, #content) .lb-lightbox-nav { transform: translateY(-50%) !important; }
+body .friend-application summary { display: flex; align-items: center; gap: 8px; min-height: 56px; list-style: none; }
+.friend-application summary::-webkit-details-marker { display: none; }
+.friend-application summary::after { content: ''; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin: 0 4px 4px auto; color: var(--gitiu-muted); }
+.friend-application[open] summary::after { transform: rotate(225deg); margin-bottom: -4px; }
+.friend-application summary:hover { color: var(--gitiu-accent); }
+
+.pagination span { opacity: .5; border-radius: var(--gitiu-control-radius); font-weight: 400; }
+@media (max-width: 860px) { :is(body, #header, #content) .gitiu-control[data-gitiu-control="nav"] { padding-inline: 7px !important; gap: 5px; font-size: 12px !important; } }
+@media (prefers-reduced-motion: reduce) { :is(body, #header, #content) .gitiu-control { transition: none !important; } }
+/* Empty/irrelevant article tools remain hidden after common control styling. */
+body.gitiu-link-page .toc-icon, body:has(.toc:empty) .toc-icon { display: none !important; }
+:is(body, #content).gitiu-link-page .toc-icon, :is(body, #content):has(.toc:empty) .toc-icon { display: none !important; }
+.copy-feedback { font-family: inherit; font-size: 11px; line-height: 1.5; }
+body #taglabel button.gitiu-control.gitiu-active-chip[aria-pressed="true"] { background: var(--gitiu-control-soft) !important; border-color: var(--gitiu-control-border) !important; color: var(--gitiu-accent) !important; font-weight: 600 !important; }
+#postBody :is(.snippet-clipboard-content, .highlight):has(clipboard-copy) pre { padding-right: 68px !important; min-height: 60px; }
+
+#cmButton.gitiu-control[style*="display: none"], #cmButton.gitiu-control[style*="display:none"] { display: none !important; }
+#cmButton.gitiu-control[aria-busy="true"] { cursor: progress; }
+/* Plugin controls must stay legible even before the external utility CSS loads. */
+.gitiu-control .d-none { display: none !important; }
+#postBody .snippet-clipboard-content { position: relative; max-width: 100%; overflow: auto; }
+#postBody .clipboard-container { position: absolute; top: 0; right: 0; }
+#gitiu-article-toc { border-radius: 14px; background: var(--gitiu-card) !important; color: var(--gitiu-ink); backdrop-filter: none; -webkit-backdrop-filter: none; }
+#postBody #gitiu-article-toc a { display: block; padding-top: 9px; padding-bottom: 9px; padding-right: 8px; border-bottom: 1px solid var(--gitiu-line); color: var(--gitiu-muted) !important; font-size: 13px; font-weight: 400; line-height: 1.65; text-decoration: none; }
+#postBody #gitiu-article-toc a:last-child { border-bottom: 0; }
+#postBody #gitiu-article-toc a:focus-visible { color: var(--gitiu-accent) !important; background: var(--gitiu-control-soft); }
+#postBody #gitiu-article-toc a:hover { color: var(--gitiu-accent) !important; background: var(--gitiu-control-soft); }
+
+/* Reserve a toolbar row so copying never obscures a long first code line. */
+#postBody .snippet-clipboard-content:has(clipboard-copy) pre { padding-top: 58px !important; padding-right: 16px !important; }
+/* Short reading pages keep a natural card height and place the footer at the screen bottom. */
+body.gitiu-post-page:not(.gitiu-link-page) { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+body.gitiu-post-page:not(.gitiu-link-page) > #header { flex: 0 0 auto; }
+body.gitiu-post-page:not(.gitiu-link-page) > #content { flex: 0 0 auto; margin-bottom: 24px; }
+body.gitiu-post-page:not(.gitiu-link-page) > #footer { flex: 0 0 auto; margin-top: auto !important; }
+@media(max-width: 860px) { body.gitiu-post-page:not(.gitiu-link-page) > #content { margin-bottom: 20px; } }
+
+/* Photo viewer lives in the native top layer, independent of article/card styles. */
+dialog.gitiu-viewer { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; background: #17191d; color: #dedfe3; color-scheme: dark; overflow: hidden; overscroll-behavior: contain; font-family: inherit; }
+dialog.gitiu-viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+dialog.gitiu-viewer::backdrop { background: #17191d; }
+.gitiu-viewer .gv-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: calc(16px + env(safe-area-inset-top)) 28px 14px; border-bottom: 1px solid #ffffff12; }
+.gv-heading { display: flex; align-items: baseline; gap: 16px; min-width: 0; }
+.gv-title { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 15px; font-weight: 500; }
+.gv-counter { flex-shrink: 0; color: #aaadb5; font: 12px/1.5 Consolas, monospace; }
+.gv-tools { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.gitiu-viewer :is(button, .gv-original) { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid #ffffff20; border-radius: 11px; background: #ffffff06; color: #dedfe3; box-shadow: none; font-family: inherit; font-size: 12px; line-height: 1.3; cursor: pointer; text-decoration: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: color .15s, background-color .15s, border-color .15s; }
+.gitiu-viewer :is(button,.gv-original):hover { background: #aabbd018; border-color: #aabbd088; color: #c3d0e0; }
+
+.gitiu-viewer :is(button,.gv-original):focus-visible { outline: 2px solid #aabbd0; outline-offset: 3px; }
+.gitiu-viewer button:disabled { opacity: .25; cursor: default; }
+.gitiu-viewer button:disabled:hover { background: #ffffff06; border-color: #ffffff20; color: #dedfe3; }
+
+.gitiu-viewer svg { display: block; width: 19px; height: 19px; pointer-events: none; }
+.gitiu-viewer .gv-close { margin-left: 8px; background: #aabbd0; border-color: #aabbd0; color: #1c1e22; }
+.gv-stage { position: relative; min-height: 0; min-width: 0; }
+.gv-canvas { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; touch-action: none; }
+.gitiu-viewer .gv-image { display: block; max-width: none; max-height: none; margin: 0; border: 0; border-radius: 3px; background: transparent; object-fit: contain; user-select: none; -webkit-user-drag: none; transform-origin: center; cursor: zoom-in; }
+.gv-zoomed .gv-image { cursor: grab; }
+.gv-zoomed .gv-canvas:active .gv-image { cursor: grabbing; }
+.gitiu-viewer [hidden] { display: none !important; }
+.gitiu-viewer :is(.gv-prev,.gv-next) { position: absolute; top: 50%; transform: translateY(-50%); background: #25282dee; box-shadow: 0 3px 18px #0005; }
+.gv-prev { left: 20px; } .gv-next { right: 20px; }
+.gv-status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; color: #aaadb5; font-size: 14px; pointer-events: none; }
+.gitiu-viewer .gv-status button { width: auto; padding: 0 18px; pointer-events: auto; }
+.gv-footer { padding: 10px 28px calc(14px + env(safe-area-inset-bottom)); border-top: 1px solid #ffffff12; }
+.gv-thumbs { display: flex; justify-content: safe center; gap: 9px; max-width: 100%; padding: 5px 3px 8px; overflow-x: auto; scrollbar-width: thin; }
+.gitiu-viewer .gv-thumbs button { position: relative; flex: 0 0 58px; width: 58px; height: 48px; border-radius: 7px; overflow: hidden; background: #2e3239; opacity: .55; }
+.gv-thumbs img { display: block; width: 100%; height: 100%; object-fit: cover; margin: 0; pointer-events: none; }
+.gitiu-viewer .gv-thumbs button[aria-pressed="true"] { opacity: 1; outline: 2px solid #aabbd0; outline-offset: 2px; }
+.gv-meta { display: flex; align-items: center; gap: 16px; min-height: 24px; padding-top: 4px; font-size: 11px; color: #aaadb5; }
+.gv-caption { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gv-help { color: #9298a3; }
+.gv-scale { min-width: 40px; text-align: right; color: #aabbd0; font-family: Consolas, monospace; }
+@media(max-width: 600px) {
+  .gitiu-viewer .gv-header { padding: calc(10px + env(safe-area-inset-top)) 12px 10px; gap: 10px; }
+  .gv-heading { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+  .gv-title { max-width: 100%; font-size: 13px; }
+  .gv-counter { font-size: 10px; }
+  .gv-tools { gap: 4px; }
+  .gitiu-viewer .gv-close { margin-left: 0; }
+  .gitiu-viewer :is(.gv-prev,.gv-next) { width: 44px; height: 44px; background: #1c1e22c9; }
+  .gv-prev { left: 8px; } .gv-next { right: 8px; }
+  .gv-footer { padding: 8px 14px calc(10px + env(safe-area-inset-bottom)); }
+  .gv-help { display: none; }
+  .gv-meta { font-size: 10px; }
+}
+@media(prefers-reduced-motion: reduce) { .gitiu-viewer :is(button,a) { transition: none; } }
+
+html.gitiu-viewing { scrollbar-gutter: auto; }
+
+/* Statistics belong to the profile, with a light chronological baseline. */
+.gitiu-notebook { margin: 26px 0 0; color: var(--gitiu-muted); }
+.gitiu-notebook-counts { display: flex; align-items: center; gap: 34px; }
+.gitiu-notebook-entry { display: flex; align-items: baseline; gap: 7px; white-space: nowrap; }
+.gitiu-notebook-entry svg { width: 18px; height: 18px; align-self: center; margin-right: 1px; color: var(--gitiu-accent); }
+.gitiu-notebook-entry strong { color: var(--gitiu-ink); font-size: 26px; line-height: 1.25; letter-spacing: -.04em; font-weight: 550; font-variant-numeric: tabular-nums; }
+.gitiu-notebook-entry > span { font-size: 12px; }
+.gitiu-notebook-time { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 8px 12px; margin-top: 20px; font-size: 10px; white-space: nowrap; letter-spacing: .025em; }
+.gitiu-notebook-thread { position: relative; grid-column: 1 / -1; height: 12px; margin: 0 5px 0 3px; background: linear-gradient(90deg, var(--gitiu-line), var(--gitiu-accent)) center / 100% 1px no-repeat; }
+.gitiu-notebook-thread::before, .gitiu-notebook-thread::after { content: ""; position: absolute; top: 50%; border-radius: 50%; transform: translateY(-50%); }
+.gitiu-notebook-thread::before { left: -3px; width: 7px; height: 7px; border: 1px solid var(--gitiu-muted); background: var(--gitiu-card); }
+.gitiu-notebook-thread::after { right: -4px; width: 8px; height: 8px; background: var(--gitiu-accent); box-shadow: 0 0 0 4px var(--gitiu-control-soft); }
+.gitiu-notebook-since { font-variant-numeric: tabular-nums; }
+.gitiu-notebook-since > span { margin-right: 4px; }
+.gitiu-notebook-today { color: var(--gitiu-accent); }
+.gitiu-notebook-time strong { color: var(--gitiu-ink); font-size: 15px; font-weight: 550; font-variant-numeric: tabular-nums; }
+.gitiu-notebook + .gitiu-profile-links { margin-top: 23px; }
+html:is([data-color-mode="dark"], [data-color-mode="auto"][data-gitiu-system-dark="true"]) .friend-emblem { background: #303742; color: #aabbd0; }
+html:is([data-color-mode="dark"], [data-color-mode="auto"][data-gitiu-system-dark="true"]) .friend-tone-1 { background: #303936; color: #a4bbb0; }
+html:is([data-color-mode="dark"], [data-color-mode="auto"][data-gitiu-system-dark="true"]) .friend-tone-2 { background: #38333e; color: #baacc7; }
+html:is([data-color-mode="dark"], [data-color-mode="auto"][data-gitiu-system-dark="true"]) .friend-tone-3 { background: #2e383d; color: #a0bdc7; }
+@media(max-width: 860px) {
+  .gitiu-notebook { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 14px 0 0; padding: 0; }
+  .gitiu-notebook-counts { gap: 19px; }
+  .gitiu-notebook-entry { gap: 4px; }
+  .gitiu-notebook-entry svg { width: 14px; height: 14px; margin-right: 2px; }
+  .gitiu-notebook-entry strong { font-size: 16px; }
+  .gitiu-notebook-entry > span { font-size: 11px; }
+  .gitiu-notebook-since, .gitiu-notebook-thread { display: none; }
+  .gitiu-notebook-time { display: block; margin: 0; font-size: 11px; }
+  .gitiu-notebook-time strong { font-size: 12px; font-weight: 500; }
+  .gitiu-notebook + .gitiu-profile-links { margin-top: 14px; }
 }

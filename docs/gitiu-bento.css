@@ -2077,3 +2077,144 @@ html:is([data-color-mode="dark"], [data-color-mode="auto"][data-gitiu-system-dar
   .gitiu-notebook-time strong { font-size: 12px; font-weight: 500; }
   .gitiu-notebook + .gitiu-profile-links { margin-top: 14px; }
 }
+
+/* A brief palette blend for explicit theme switches; no layout animation. */
+@media (prefers-reduced-motion: no-preference) {
+  html.gitiu-theme-transition,
+  html.gitiu-theme-transition *,
+  html.gitiu-theme-transition *::before,
+  html.gitiu-theme-transition *::after {
+    transition-property: background-color, color, border-color, box-shadow, fill, stroke !important;
+    transition-duration: 240ms !important;
+    transition-timing-function: ease-out !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* Profile links read as quiet navigation, with generous click targets. */
+#content .gitiu-profile-links {
+  padding-top: 12px;
+  border-top: 0;
+}
+#content .gitiu-profile-links .gitiu-links {
+  margin-top: 0;
+  gap: 4px 20px;
+}
+#content .gitiu-profile-links .gitiu-links .gitiu-link-pill {
+  justify-content: flex-start !important;
+  min-height: 44px !important;
+  padding: 0 8px !important;
+  gap: 10px;
+  border: 0 !important;
+  border-bottom: 1px solid var(--gitiu-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  box-shadow: none !important;
+}
+#content .gitiu-profile-links .gitiu-links .gitiu-link-pill svg {
+  width: 15px;
+  height: 15px;
+  color: var(--gitiu-muted) !important;
+}
+#content .gitiu-profile-links .gitiu-link-pill::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-left: auto;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+  color: var(--gitiu-muted);
+}
+@media (hover: hover) {
+  #content .gitiu-profile-links .gitiu-links .gitiu-link-pill:hover {
+    color: var(--gitiu-accent) !important;
+    background: var(--gitiu-post-hover) !important;
+    border-bottom-color: var(--gitiu-accent) !important;
+  }
+}
+@media (max-width: 860px) {
+  #content .gitiu-profile-links {
+    padding-top: 8px;
+    border-top: 1px solid var(--gitiu-line);
+  }
+  #content .gitiu-profile-links .gitiu-links { gap: 4px; }
+  #content .gitiu-profile-links .gitiu-links .gitiu-link-pill {
+    justify-content: center !important;
+    padding: 0 4px !important;
+    gap: 6px;
+    border-bottom: 0 !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+  }
+  #content .gitiu-profile-links .gitiu-link-pill::after { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #content .gitiu-profile-links .gitiu-link-pill::after { transition: transform 180ms ease, color 180ms ease; }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  #content .gitiu-profile-links .gitiu-link-pill:is(:hover, :focus-visible)::after { transform: translateX(3px) rotate(45deg); }
+}
+
+/* A living timeline and brief, coordinated feedback on the home page. */
+@media (prefers-reduced-motion: no-preference) {
+  .gitiu-home .gitiu-bento-grid > .gitiu-card {
+    animation: gitiu-card-arrive 420ms cubic-bezier(.22, .61, .36, 1) backwards;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+  .gitiu-home .gitiu-post-card { animation-delay: 60ms; }
+  .gitiu-home .gitiu-quick-card { animation-delay: 120ms; }
+  .gitiu-notebook-thread::after {
+    animation: gitiu-today-breathe 3.6s ease-in-out infinite;
+  }
+  .gitiu-notebook-thread {
+    background-image: linear-gradient(90deg, transparent, var(--gitiu-accent), transparent), linear-gradient(90deg, var(--gitiu-line), var(--gitiu-accent));
+    background-size: 24% 2px, 100% 1px;
+    background-position: -35% center, center;
+    background-repeat: no-repeat;
+  }
+  .gitiu-home .gitiu-post-item h2,
+  .gitiu-home .gitiu-quote-more,
+  .gitiu-home .gitiu-brand-logo {
+    transition: transform 200ms ease, color 180ms ease, background-size 180ms ease;
+  }
+  .gitiu-home .gitiu-post-item h2 { display: inline-block; }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .gitiu-home .gitiu-bento-grid > .gitiu-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--gitiu-line);
+  }
+  .gitiu-profile-card:hover .gitiu-notebook-thread {
+    background-position: 135% center, center;
+    transition: background-position 1100ms cubic-bezier(.22, .61, .36, 1);
+  }
+  .gitiu-home .gitiu-post-item:is(:hover, :focus-visible) h2 { transform: translateX(3px); }
+  .gitiu-home .gitiu-quick-card:hover .gitiu-quote-more { transform: translateX(3px); }
+  .gitiu-home .gitiu-brand-link:hover .gitiu-brand-logo { transform: rotate(-2deg); }
+}
+@media (max-width: 860px) {
+  .gitiu-notebook-today::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: var(--gitiu-accent);
+    vertical-align: 2px;
+  }
+}
+@media (max-width: 860px) and (prefers-reduced-motion: no-preference) {
+  .gitiu-notebook-today::before { animation: gitiu-today-breathe 3.6s ease-in-out infinite; }
+}
+@keyframes gitiu-card-arrive {
+  from { opacity: 0; translate: 0 8px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes gitiu-today-breathe {
+  0%, 100% { opacity: .65; box-shadow: 0 0 0 2px var(--gitiu-control-soft); }
+  50% { opacity: 1; box-shadow: 0 0 0 6px transparent; }
+}

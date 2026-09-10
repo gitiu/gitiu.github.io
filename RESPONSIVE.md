@@ -1,6 +1,6 @@
 # 响应式修复与设计说明（2026-09-09）
 
-## 撤回悬停调整（20260910f）
+## 撤回悬停调整（20260910m）
 
 按用户要求撤回 20260910e 的整轮悬停调整，恢复 20260910d 的按钮、文章、友链和文字链接交互样式。保留此前的统计摘要、建站时间轴与深色配色，使用新资源版本刷新缓存。
 
@@ -64,7 +64,7 @@ npx --yes --package @playwright/cli playwright-cli -s=responsive open http://127
 npx --yes --package @playwright/cli playwright-cli -s=responsive run-code --filename=tools/responsive-audit.js --raw
 ```
 
-维护入口是 `static/gitiu-bento.css` 与 `static/gitiu-bento.js`。已同步 `docs/` 产物及预渲染脚本，资源版本为 `20260910f`。改动版本时同时更新 JS 和预渲染脚本中的版本常量，再运行 `python static/gitiu-prerender.py` 同步页面引用。GitHub Actions 沿用现有构建流程。
+维护入口是 `static/gitiu-bento.css` 与 `static/gitiu-bento.js`。已同步 `docs/` 产物及预渲染脚本，资源版本为 `20260910m`。改动版本时同时更新 JS 和预渲染脚本中的版本常量，再运行 `python static/gitiu-prerender.py` 同步页面引用。GitHub Actions 沿用现有构建流程。
 
 
 ## 手机首页密度调整（20260909b）

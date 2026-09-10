@@ -5,7 +5,7 @@ from html import escape
 from pathlib import Path
 
 
-BENTO_VERSION = "20260910f"
+BENTO_VERSION = "20260910m"
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
@@ -128,7 +128,6 @@ def profile_card(config, posts):
           <span class="gitiu-brand-subtitle"><img class="gitiu-slogan-art" src="/logos/gitiu-slogan.svg" width="240" height="40" alt="我的生活际遇"></span>
         </div>
       </div>
-      <p>记录生活、短句、旅途、夜晚和一些还没有被归类的瞬间。</p>
       <div class="gitiu-notebook" aria-label="博客记录摘要">
         <div class="gitiu-notebook-counts">
           <div class="gitiu-notebook-entry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5l5 5M4 20l5-1L20 8a2.8 2.8 0 0 0-4-4L5 15l-1 5ZM13 20h7"/></svg><strong>{len(posts)}</strong><span>条记录</span></div>
@@ -140,8 +139,7 @@ def profile_card(config, posts):
           <span class="gitiu-notebook-today"><span class="gitiu-notebook-day-prefix">第 </span><strong>{run_days}</strong> 天</span>
         </div>
       </div>
-      <div class="gitiu-profile-links">
-        <span class="gitiu-card-subtle">探索</span>
+      <div class="gitiu-profile-links" role="navigation" aria-label="探索博客">
         <div class="gitiu-links">
           {pill("about.html", "关于", "about")}
           {pill("tag.html", "归档", "post")}

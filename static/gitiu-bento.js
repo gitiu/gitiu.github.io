@@ -1,5 +1,5 @@
 (function () {
-  const BENTO_VERSION = "20260910f";
+  const BENTO_VERSION = "20260910m";
   if (window.__gitiuBentoReady === BENTO_VERSION) return;
   window.__gitiuBentoReady = BENTO_VERSION;
   window.__gitiuBentoVersion = BENTO_VERSION;
@@ -12,6 +12,22 @@
   };
   syncSystemTheme();
   systemTheme.addEventListener("change", syncSystemTheme);
+
+  // Capture both generated and template buttons before their theme handlers run.
+  // Enable transitions only for an explicit switch, never during first paint.
+  let themeTransitionTimer;
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element) || !event.target.closest('[title="切换主题"]')) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const root = document.documentElement;
+    window.clearTimeout(themeTransitionTimer);
+    root.classList.add("gitiu-theme-transition");
+    // Commit the current palette before the click handler changes the theme.
+    void root.offsetWidth;
+    themeTransitionTimer = window.setTimeout(() => {
+      root.classList.remove("gitiu-theme-transition");
+    }, 300);
+  }, true);
 
   const isHomePage = /\/(?:index\.html|page\d+\.html)?$/.test(location.pathname) || location.pathname === "/";
   const isTalkPage = /\/talk\.html$/.test(location.pathname);
@@ -282,7 +298,6 @@
           <span class="gitiu-brand-subtitle"><img class="gitiu-slogan-art" src="/logos/gitiu-slogan.svg" width="240" height="40" alt="我的生活际遇"></span>
         </div>
       </div>
-      <p>记录生活、短句、旅途、夜晚和一些还没有被归类的瞬间。</p>
       <div class="gitiu-notebook" aria-label="博客记录摘要">
         <div class="gitiu-notebook-counts">
           <div class="gitiu-notebook-entry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5l5 5M4 20l5-1L20 8a2.8 2.8 0 0 0-4-4L5 15l-1 5ZM13 20h7"/></svg><strong>${posts}</strong><span>条记录</span></div>
@@ -294,8 +309,7 @@
           <span class="gitiu-notebook-today"><span class="gitiu-notebook-day-prefix">第 </span><strong>${runDays}</strong> 天</span>
         </div>
       </div>
-      <div class="gitiu-profile-links">
-        <span class="gitiu-card-subtle">探索</span>
+      <div class="gitiu-profile-links" role="navigation" aria-label="探索博客">
         <div class="gitiu-links">
           ${pillMarkup("about.html", "关于", "about")}
           ${pillMarkup("tag.html", "归档", "post")}
